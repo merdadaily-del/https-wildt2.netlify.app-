@@ -6,11 +6,12 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
 <!-- SEO BASE -->
-<title>Wild Table Cilento — Weekend di Cucina, Mare e Natura a Marina di Camerota</title>
-<meta name="description" content="Un weekend nel Cilento autentico: lezione di cucina con Vincenza una "zia" cilentana, yoga tra gli ulivi, trekking verso Cala Bianca e barca nell'Area Marina Protetta. Solo 8 persone. Da 440€ tutto incluso. Marina di Camerota (SA).">
-<meta name="keywords" content="weekend Cilento, cucina cilentana, cooking class Cilento, Marina di Camerota, esperienze Cilento, Parco Nazionale Cilento, weekend cucina mare, Wild Table Cilento">
+<title>Esperienze a Marina di Camerota, Cilento | Wild Table</title>
+<meta name="description" content="Vivi Marina di Camerota con Wild Table. Cooking class, trekking tra gli ulivi e gite in barca. Tre giorni nel Cilento, in piccoli gruppi di massimo 8 persone.">
+<meta name="keywords" content="esperienze Marina di Camerota, weekend Cilento, cooking class Cilento, trekking Marina di Camerota, esperienze autentiche Cilento">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Wild Table Cilento">
+<!-- Da aggiornare con il dominio definitivo -->
 <link rel="canonical" href="https://wildtable.netlify.app/">
 
 <!-- GEO -->
@@ -22,71 +23,48 @@
 <!-- OPEN GRAPH -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://wildtable.netlify.app/">
-<meta property="og:title" content="Wild Table Cilento — Weekend di Cucina, Mare e Natura">
-<meta property="og:description" content="Cucina con Vincenza una "zia" cilentana, fai yoga, trekking e un giro in barca nel Cilento più autentico. Solo 8 persone. Da 440€ tutto incluso.">
+<meta property="og:title" content="Tre giorni nel Cilento. Fuori dall'ordinario. | Wild Table">
+<meta property="og:description" content="Vivi Marina di Camerota con Wild Table. Cooking class, trekking tra gli ulivi e gite in barca. Tre giorni nel Cilento, in piccoli gruppi di massimo 8 persone.">
 <meta property="og:image" content="https://wildtable.netlify.app/barca-caletta.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="Wild Table Cilento">
 
 <!-- TWITTER CARD -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Wild Table Cilento — Weekend di Cucina, Mare e Natura">
-<meta name="twitter:description" content="Lezione di cucina cilentana, yoga, trekking e barca nel Cilento più autentico. Solo 8 persone. Da 440€.">
+<meta name="twitter:title" content="Tre giorni nel Cilento. Fuori dall'ordinario. | Wild Table">
+<meta name="twitter:description" content="Vivi Marina di Camerota con Wild Table. Cooking class, trekking tra gli ulivi e gite in barca. Tre giorni nel Cilento, in piccoli gruppi di massimo 8 persone.">
 <meta name="twitter:image" content="https://wildtable.netlify.app/barca-caletta.jpg">
 
-<!-- STRUCTURED DATA -->
+<!-- STRUCTURED DATA: solo Organization, WebSite e FAQ (nessun dato di hotel o recensioni) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "TouristAttraction",
-      "@id": "https://wildtable.netlify.app/#place",
+      "@type": "Organization",
+      "@id": "https://wildtable.netlify.app/#organization",
       "name": "Wild Table Cilento",
-      "description": "Weekend esperienziale nel Parco Nazionale del Cilento: cucina cilentana con Vincenza, yoga, trekking e barca. Solo 8 persone. Marina di Camerota (SA).",
       "url": "https://wildtable.netlify.app/",
-      "image": "https://wildtable.netlify.app/barca-caletta.jpg",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Monte di Luna",
-        "addressLocality": "Marina di Camerota",
-        "addressRegion": "SA",
-        "postalCode": "84059",
-        "addressCountry": "IT"
-      },
-      "geo": { "@type": "GeoCoordinates", "latitude": 40.0197, "longitude": 15.3714 },
+      "logo": "https://wildtable.netlify.app/favicon.svg",
       "telephone": "+393491751853",
-      "priceRange": "€€"
+      "address": { "@type": "PostalAddress", "addressLocality": "Marina di Camerota", "addressRegion": "SA", "postalCode": "84059", "addressCountry": "IT" }
     },
     {
-      "@type": "Event",
-      "@id": "https://wildtable.netlify.app/#event",
-      "name": "Wild Table Cilento — Weekend di Cucina, Mare e Natura",
-      "description": "Lezione di cucina cilenta, cena sotto le stelle, yoga, trekking verso Cala Bianca, barca nell'Area Marina Protetta Costa degli Infreschi. Solo 8 persone.",
+      "@type": "WebSite",
+      "@id": "https://wildtable.netlify.app/#website",
+      "name": "Wild Table Cilento",
       "url": "https://wildtable.netlify.app/",
-      "image": "https://wildtable.netlify.app/barca-caletta.jpg",
-      "organizer": { "@type": "Organization", "name": "Wild Table Cilento", "url": "https://wildtable.netlify.app/" },
-      "location": {
-        "@type": "Place",
-        "name": "Villa Monte di Luna",
-        "address": { "@type": "PostalAddress", "addressLocality": "Marina di Camerota", "addressRegion": "SA", "addressCountry": "IT" }
-      },
-      "offers": [
-        { "@type": "Offer", "name": "The Experience", "price": "440", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://wildtable.netlify.app/#prenota" },
-        { "@type": "Offer", "name": "Long Weekend", "price": "610", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://wildtable.netlify.app/#prenota" },
-        { "@type": "Offer", "name": "Self Drive", "price": "340", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://wildtable.netlify.app/#prenota" }
-      ]
+      "inLanguage": "it-IT",
+      "publisher": { "@id": "https://wildtable.netlify.app/#organization" }
     },
     {
       "@type": "FAQPage",
       "@id": "https://wildtable.netlify.app/#faq",
       "mainEntity": [
         { "@type": "Question", "name": "Devo saper cucinare?", "acceptedAnswer": { "@type": "Answer", "text": "No. Vincenza parte da zero. L'unica cosa che serve è la voglia di sporcarsi le mani." } },
-        { "@type": "Question", "name": "Posso venire da solo?", "acceptedAnswer": { "@type": "Answer", "text": "Sì, molti vengono da soli. Il gruppo è piccolo — 8 persone al massimo — ci si conosce davvero." } },
-        { "@type": "Question", "name": "Quando si paga?", "acceptedAnswer": { "@type": "Answer", "text": "Prima si parla. Nessun pagamento anticipato — risposta entro 24 ore." } },
-        { "@type": "Question", "name": "Come si arriva a Marina di Camerota?", "acceptedAnswer": { "@type": "Answer", "text": "In treno fino a Pisciotta-Palinuro (da Napoli Intercity diretto, da Roma circa 3h40) oppure in aereo fino a Salerno Costa d'Amalfi, poi Intercity in 40 minuti. Il driver vi aspetta in stazione." } }
+        { "@type": "Question", "name": "Posso venire da solo?", "acceptedAnswer": { "@type": "Answer", "text": "Sì, molti vengono da soli. Il gruppo è piccolo — 8 persone al massimo — ci si conosce davvero. Le camere sono doppie: se vieni da solo potresti condividere la stanza con un compagno d'avventura." } },
+        { "@type": "Question", "name": "Quando si paga?", "acceptedAnswer": { "@type": "Answer", "text": "Prima si parla. Nessun pagamento anticipato — ti rispondo entro 24 ore e concorderemo tutto." } },
+        { "@type": "Question", "name": "Politica di cancellazione?", "acceptedAnswer": { "@type": "Answer", "text": "Cancellazione gratuita fino a 30 giorni prima. Sotto i 30 giorni la quota non è rimborsabile, ma il posto è trasferibile a un'altra persona o spostabile a una data futura." } }
       ]
     }
   ]
@@ -554,6 +532,78 @@
   .popup-skip { font-size: 0.85rem; color: #666; cursor: pointer; background: none; border: none; text-decoration: underline; padding: 12px; }
   .popup-skip:hover { color: #666; }
 
+  /* ── NUOVA STRUTTURA ── */
+  .hero h1 { max-width: 15ch; }
+  .hero-points { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+  .hero-points li { border: 1px solid rgba(255,255,255,0.45); border-radius: 100px; padding: 6px 15px; font-size: 0.85rem; }
+  .hero-actions .btn-ghost { opacity: 1; font-size: 0.95rem; padding: 14px 0 2px; }
+  .hero-note { font-size: 0.85rem; opacity: 0.85; margin-top: 24px; max-width: 520px; }
+  .section-intro { font-size: 1.05rem; color: #555; max-width: 560px; margin-top: -8px; }
+
+  .promessa { background: var(--sabbia); }
+  .promessa-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; }
+  .promessa-text p { font-size: 1.07rem; color: #2a2a2a; margin-bottom: 16px; }
+  .numeri-4 { grid-template-columns: repeat(4, 1fr); margin-top: 56px; }
+
+  .esperienze { background: white; }
+  .exp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; }
+  .exp-card { border: 1px solid rgba(0,0,0,0.1); padding: 28px 24px; display: flex; flex-direction: column; gap: 10px; }
+  .exp-card-icon svg { width: 32px; height: 32px; fill: none; stroke: var(--salvia); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .exp-card h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 400; }
+  .exp-card p { font-size: 0.95rem; color: #2a2a2a; line-height: 1.65; }
+  .exp-card .exp-card-detail { font-size: 0.85rem; color: #666; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 10px; margin-top: auto; }
+
+  .lezione { margin-top: 72px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 48px; }
+  .lezione-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 400; color: var(--sabbia); margin-bottom: 10px; }
+  .lezione-intro { color: rgba(242,237,228,0.82); max-width: 640px; margin-bottom: 36px; }
+  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 48px; }
+  .vincenza .step-num { color: #e8c47a; }
+  .vincenza .step-content h3 { color: var(--sabbia); }
+  .vincenza .step-content p { color: rgba(242,237,228,0.78); }
+
+  .territorio { background: var(--sabbia); }
+  .territorio-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: start; }
+  .territorio-lead { font-family: 'Playfair Display', serif; font-size: 1.25rem; line-height: 1.5; margin-bottom: 20px; }
+  .territorio p:not(.territorio-lead):not(.arrivare-desc):not(.arrivare-intro) { font-size: 1.02rem; color: #2a2a2a; margin-bottom: 14px; }
+  .territorio-img { width: 100%; height: auto; aspect-ratio: 3/2; object-fit: cover; position: sticky; top: 100px; }
+  .arrivare { margin-top: 80px; }
+  .arrivare-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 10px; }
+
+  .programma { background: white; }
+  .timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; margin-top: 48px; position: relative; }
+  .timeline::before { content: ""; position: absolute; top: 7px; left: 0; right: 0; height: 2px; background: rgba(74,92,58,0.25); }
+  .timeline .giorno { position: relative; padding-top: 32px; margin: 0; }
+  .timeline .giorno::before { content: ""; position: absolute; top: 0; left: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--salvia); border: 3px solid white; box-shadow: 0 0 0 2px var(--salvia); }
+  .timeline .giorno-header { flex-direction: column; align-items: flex-start; gap: 4px; border: none; padding: 0; margin-bottom: 12px; }
+  .timeline .giorno-title { font-size: 1.2rem; }
+  .timeline .attivita li { font-size: 0.9rem; padding: 7px 0; }
+
+  .pacchetti { background: var(--sabbia); }
+  .pacchetti .card { background: white; display: flex; flex-direction: column; }
+  .pacchetti .card-featured { background: var(--mare); }
+  .card-tag { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ocra-testo); margin-bottom: 10px; }
+  .card-featured .card-tag { color: #e8c47a; }
+  .card-desc { font-size: 0.95rem; color: #2a2a2a; margin-bottom: 20px; }
+  .card-featured .card-desc { color: rgba(242,237,228,0.85); }
+  .card-details { margin-bottom: 24px; flex-grow: 1; }
+  .card-details summary { cursor: pointer; font-size: 0.9rem; font-weight: 500; color: var(--salvia); padding: 8px 0; }
+  .card-featured .card-details summary { color: #e8c47a; }
+  .card-details ul { margin: 8px 0 0; }
+  .pacchetti .card .btn-primary { margin-top: auto; }
+
+  .faq { background: white; }
+  .faq-groups { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 64px; margin-top: 48px; }
+  .faq-group-title { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--salvia); border-bottom: 2px solid var(--salvia); padding-bottom: 10px; }
+  .faq-groups .faq-list { margin-top: 0; max-width: none; }
+
+  @media (max-width: 1000px) {
+    .exp-grid { grid-template-columns: repeat(2, 1fr); }
+    .timeline { grid-template-columns: 1fr; gap: 0; padding-left: 28px; }
+    .timeline::before { top: 0; bottom: 0; left: 7px; right: auto; width: 2px; height: auto; }
+    .timeline .giorno { padding: 0 0 32px; }
+    .timeline .giorno::before { left: -28px; top: 4px; }
+  }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     nav { padding: 10px 12px 10px 20px; }
@@ -569,7 +619,10 @@
     .hero-eyebrow { padding-right: 52px; }
     section { padding: 64px 20px; }
     .hero { padding: 80px 20px 48px; }
-    .cosa-e-grid, .vincenza-grid, .cooking-layout, .prenota-grid, .cards, .cards-3 { grid-template-columns: 1fr; gap: 40px; }
+    .cosa-e-grid, .vincenza-grid, .cooking-layout, .prenota-grid, .cards, .cards-3,
+    .promessa-grid, .territorio-grid, .steps-grid, .faq-groups, .exp-grid { grid-template-columns: 1fr; gap: 32px; }
+    .numeri-4 { grid-template-columns: 1fr 1fr; }
+    .territorio-img { position: static; }
     .numeri { grid-template-columns: 1fr 1fr; }
     footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
     .toast { left: 12px; right: 80px; bottom: 16px; max-width: none; padding: 10px 14px; }
@@ -584,13 +637,13 @@
   <a class="nav-logo" href="#">Wild <em>Table</em> Cilento</a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#esperienza">L'esperienza</a></li>
-    <li><a href="#date">Date</a></li>
-    <li><a href="#prezzi">Prezzi</a></li>
-    <li><a href="#vincenza">La "zia" cilentana</a></li>
-    <li><a href="#programma">Programma</a></li>
+    <li><a href="#territorio">Il territorio</a></li>
+    <li><a href="#vincenza">Vincenza</a></li>
+    <li><a href="#programma">Il programma</a></li>
+    <li><a href="#pacchetti">I pacchetti</a></li>
   </ul>
   <div class="nav-right">
-    <div class="nav-cta"><a href="#prenota">Prenota</a></div>
+    <div class="nav-cta"><a href="#partecipa">Partecipa</a></div>
     <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Apri il menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -598,7 +651,7 @@
 </nav>
 
 <main>
-<!-- HERO VIDEO -->
+<!-- 1 · HERO -->
 <section class="hero">
   <!-- Un solo video (verticale 720×1280). Per desktop servirebbe una versione orizzontale 1280×720. -->
   <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto" poster="barca-caletta.webp" aria-hidden="true">
@@ -609,134 +662,99 @@
   </button>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow">Monte di Luna · Marina di Camerota (SA) · Parco Nazionale del Cilento</div>
-    <h1>Cucina.<br>Natura. <em>Mare.</em></h1>
-    <p class="hero-sub">Vieni a scoprire il lato selvaggio del Cilento per un weekend. A Marina di Camerota con <em>corso di cucina cilentana con una "zia" cilentana e cena sotto le stelle</em>, gita in barca lungo la costa del mito, trekking tra i sentieri selvaggi e yoga mattutino per risvegliare i sensi. Solo per 8 persone alla volta, tutto incluso. Si vive una volta sola e nel Cilento, almeno una volta, bisogna andarci.</p>
-    <div class="hero-pills">
-      <span class="pill">Solo 8 persone</span>
-      <span class="pill">3 giorni tutto incluso</span>
-      <span class="pill">da 440€ a persona</span>
-      <span class="pill">Long Weekend da 610€</span>
-      <span class="pill">Driver privato dalla stazione</span>
-    </div>
+    <div class="hero-eyebrow">Wild Table · Marina di Camerota · Cilento</div>
+    <h1>Tre giorni nel Cilento. <em>Fuori dall'ordinario.</em></h1>
+    <p class="hero-sub">Cooking class, trekking tra gli ulivi e gite in barca. Un'esperienza per scoprire il Cilento attraverso i suoi sapori, i suoi paesaggi e le persone che lo abitano.</p>
+    <ul class="hero-points">
+      <li>Piccoli gruppi, massimo 8 ospiti</li>
+      <li>Da 340 € a persona</li>
+    </ul>
     <div class="hero-actions">
-      <a href="#prenota" class="btn-primary">Voglio partecipare</a>
-      <a href="#come-arrivare" class="btn-ghost">Il Cilento è più vicino di quanto credi — come arrivare →</a>
+      <a href="#pacchetti" class="btn-primary">Scopri i pacchetti</a>
+      <a href="#partecipa" class="btn-ghost">Voglio partecipare</a>
     </div>
+    <p class="hero-note">Stiamo raccogliendo le manifestazioni di interesse per le prossime esperienze. Nessun pagamento richiesto in questa fase.</p>
   </div>
 </section>
 
-<!-- HERO 2 -->
-<div class="hero2">
-  <p>Un weekend a Marina di Camerota con <em>corso di cucina cilentana</em>, gita in barca, trekking e yoga mattutino — per scoprire il lato selvaggio del Cilento.</p>
-</div>
-
-<!-- COSA È -->
-<section class="cosa-e" id="esperienza">
-  <div class="cosa-e-grid">
+<!-- 2 · LA PROMESSA -->
+<section class="promessa" id="esperienza">
+  <div class="promessa-grid">
     <div>
-      <div class="section-label">Cos'è Wild Table</div>
-      <h2>Non un hotel.<br><em>Un'esperienza condivisa.</em></h2>
-      <p>Wild Table è un weekend organizzato per solo 8 persone, in una villa privata a Monte di Luna, Marina di Camerota, nel cuore del Parco Nazionale del Cilento.</p>
-      <p>Non prenoti una camera. Il driver ti aspetta in stazione venerdì sera e da lì ogni cosa è già pensata: dove dormi, cosa mangi, dove vai, chi ti guida. Torni a casa con qualche ricetta nuova — e probabilmente con qualcuno con cui tenerti in contatto.</p>
-      <p>Si dorme in <strong>due appartamenti</strong>. Le camere sono doppie — può capitare di condividere la stanza con uno dei compagni di viaggio. Fa parte dell'esperienza.</p>
-      <p><strong>Porti solo te stesso.</strong> Il resto è incluso.</p>
-      <div class="esperienze-list">
-        <div class="section-label" style="margin-top:28px;">Le 5 esperienze incluse</div>
-        <ul class="exp-bullets">
-          <li><span class="exp-icon"></span><div><strong>Cooking class con Vincenza</strong> — Vincenza è la nostra "zia" cilentana e cucina a Marina di Camerota da tutta la vita. Ti insegna a fare i cavatielli (la pasta fresca cilentana di semola, formata a mano con le dita) e le mulignane mbuttunate (melanzane ripiene fritte secondo la ricetta di famiglia)</div></li>
-          <li><span class="exp-icon"></span><div><strong>Gita in barca</strong> — Grotte marine e tuffo nell'Area Marina Protetta Costa degli Infreschi</div></li>
-          <li><span class="exp-icon"></span><div><strong>Trekking guidato</strong> — Sentieri del Parco Nazionale verso Cala Bianca con guida locale</div></li>
-          <li><span class="exp-icon"></span><div><strong>Yoga mattutino</strong> — Sessione tra gli ulivi di Monte di Luna, con vista sul golfo</div></li>
-          <li><span class="exp-icon"></span><div><strong>Sit-Around Dinner</strong> — Cena sotto le stelle con il cibo preparato insieme e il vino del Cilento</div></li>
-        </ul>
-      </div>
+      <div class="section-label">Non è una vacanza qualsiasi</div>
+      <h2>Tre giorni per <em>cambiare ritmo.</em></h2>
     </div>
-    <div class="numeri">
-      <div class="numero-card">
-        <div class="n">8</div>
-        <div class="label">persone al massimo</div>
-      </div>
-      <div class="numero-card">
-        <div class="n">3</div>
-        <div class="label">giorni nel Cilento</div>
-      </div>
-      <div class="numero-card">
-        <div class="n">5</div>
-        <div class="label">esperienze incluse</div>
-      </div>
-      <div class="numero-card">
-        <div class="n">440€</div>
-        <div class="label">tutto incluso</div>
-      </div>
+    <div class="promessa-text">
+      <p>Ci sono luoghi che si visitano e luoghi che si imparano a conoscere. Il Cilento è uno di questi.</p>
+      <p>A Marina di Camerota abbiamo immaginato tre giorni diversi dal solito. Si cucina insieme, si cammina tra gli ulivi, si scopre la costa dal mare e ci si ritrova intorno a una tavola.</p>
+      <p>Un piccolo gruppo, ritmi più lenti e il piacere di vivere un territorio attraverso le sue persone, i suoi sapori e i suoi paesaggi.</p>
     </div>
+  </div>
+  <div class="numeri numeri-4">
+    <div class="numero-card"><div class="n">8</div><div class="label">ospiti al massimo</div></div>
+    <div class="numero-card"><div class="n">3</div><div class="label">giorni nel Cilento</div></div>
+    <div class="numero-card"><div class="n">4</div><div class="label">esperienze</div></div>
+    <div class="numero-card"><div class="n">340€</div><div class="label">a persona, da</div></div>
   </div>
 </section>
 
-<!-- PREZZI -->
-<section class="prezzi" id="prezzi">
-  <div class="section-label">Come partecipare</div>
-  <h2>Scegli il tuo <em>Wild Table.</em></h2>
-  <div class="cards cards-3">
-    <div class="card card-featured">
-           <h3>The Experience</h3>
-      <div class="card-price"><sup>€</sup>440</div>
-      <div class="card-note">a persona · venerdì → domenica</div>
-      <ul>
-        <li>Transfer privato stazione–villa, andata e ritorno</li>
-        <li>2 notti in villa a Monte di Luna</li>
-        <li>Colazioni incluse</li>
-        <li>Lezione di cucina con Vincenza</li>
-        <li>Cena condivisa con vino cilentano</li>
-        <li>Yoga mattutino tra gli ulivi</li>
-        <li>Trekking guidato verso Cala Bianca</li>
-        <li>Gita in barca nell'Area Marina Protetta</li>
-      </ul>
-      <a href="#prenota" class="btn-primary">Voglio partecipare</a>
-    </div>
-    <div class="card card-long">
-      <div class="card-badge" style="background:var(--salvia);">Per chi viene da lontano</div>
-      <h3>Long Weekend</h3>
-      <div class="card-price"><sup>€</sup>610</div>
-      <div class="card-note">a persona · giovedì → lunedì</div>
-      <ul>
-        <li>Transfer privato stazione–villa, andata e ritorno</li>
-        <li>4 notti in villa a Monte di Luna</li>
-        <li>Colazioni incluse</li>
-        <li>Lezione di cucina con Vincenza</li>
-        <li>Cena condivisa con vino cilentano</li>
-        <li>Yoga mattutino tra gli ulivi</li>
-        <li>Trekking guidato verso Cala Bianca</li>
-        <li>Gita in barca nell'Area Marina Protetta</li>
-        <li>Giovedì e lunedì liberi — il Cilento senza fretta</li>
-      </ul>
-      <a href="#prenota" class="btn-primary">Voglio partecipare</a>
-    </div>
-    <div class="card">
-      <h3>Self Drive</h3>
-      <div class="card-price"><sup>€</sup>340</div>
-      <div class="card-note">a persona · se arrivi con la tua auto</div>
-      <ul>
-        <li>2 notti in villa a Monte di Luna</li>
-        <li>Colazioni incluse</li>
-        <li>Lezione di cucina con Vincenza</li>
-        <li>Cena condivisa con vino cilentano</li>
-        <li>Yoga mattutino</li>
-        <li>Trekking nel Parco Nazionale del Cilento</li>
-        <li>Gita in barca nell'Area Marina Protetta</li>
-        <li class="non-incluso">Transfer non incluso</li>
-      </ul>
-      <a href="#prenota" class="btn-primary" style="background:var(--mare); color:white;">Voglio partecipare</a>
-    </div>
+<!-- 3 · LE ESPERIENZE -->
+<section class="esperienze" id="esperienze">
+  <div class="section-label">Le esperienze</div>
+  <h2>Il Cilento, <em>in tutte le sue sfumature.</em></h2>
+  <p class="section-intro">Quattro modi per entrare in contatto con il territorio.</p>
+  <div class="exp-grid">
+      <article class="exp-card">
+        <div class="exp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3v7a3 3 0 0 0 3 3v8M7 3v6M10 3v6M13 3v6M17 3c-1.7 0-3 2.2-3 5v5h3v8"/></svg></div>
+        <h3>In cucina</h3>
+        <p>Una cooking class con Vincenza per scoprire gesti, ricette e sapori della tradizione cilentana.</p>
+        <p class="exp-card-detail">Vincenza è la nostra "zia" cilentana e cucina a Marina di Camerota da tutta la vita. Ti insegna a fare i cavatielli (la pasta fresca cilentana di semola, formata a mano con le dita) e le mulignane mbuttunate (melanzane ripiene fritte secondo la ricetta di famiglia)</p>
+      </article>
+      <article class="exp-card">
+        <div class="exp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21V9M12 13c-3 0-5-2-5-5 3 0 5 2 5 5zM12 10c3 0 5-2 5-5-3 0-5 2-5 5zM5 21h14"/></svg></div>
+        <h3>Tra gli ulivi</h3>
+        <p>Trekking e passeggiate nella natura, tra gli uliveti e i paesaggi del Cilento.</p>
+        <p class="exp-card-detail">Sentieri del Parco Nazionale verso Cala Bianca con guida locale</p>
+      </article>
+      <article class="exp-card">
+        <div class="exp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17l2 3h14l2-3H3zM12 3v14M12 4l6 10h-6M2 21c2 0 2-1 4-1s2 1 4 1 2-1 4-1 2 1 4 1 2-1 4-1"/></svg></div>
+        <h3>In barca</h3>
+        <p>Una giornata lungo la costa, alla scoperta del mare e delle sue calette.</p>
+        <p class="exp-card-detail">Grotte marine e tuffo nell'Area Marina Protetta Costa degli Infreschi</p>
+      </article>
+      <article class="exp-card">
+        <div class="exp-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 10h18M5 10l1 10M19 10l-1 10M8 6c0-1.5 1-3 4-3s4 1.5 4 3"/></svg></div>
+        <h3>A tavola</h3>
+        <p>Il piacere di stare insieme, condividere piatti e conversazioni e assaporare la convivialità cilentana.</p>
+        <p class="exp-card-detail">Cena sotto le stelle con il cibo preparato insieme e il vino del Cilento</p>
+      </article>
   </div>
 </section>
-<!-- COOKING CLASS -->
-<section class="cooking">
-  <div class="cooking-layout">
+
+<!-- 4 · VINCENZA -->
+<section class="vincenza" id="vincenza">
+  <div class="vincenza-grid">
     <div>
-      <div class="section-label">La lezione di cucina</div>
-      <h2>Si impasta.<br>Si cucina.<br><em>Si mangia.</em></h2>
-      <p style="color:#555; margin-bottom:40px; font-size:1rem;">La cooking class con Vincenza non è un corso. È un pomeriggio in cucina con una cilentana che sa fare cose che voi non sapete fare — e ve le insegna senza fronzoli.</p>
+      <div class="section-label">Vincenza</div>
+      <h2>Le storie più belle <em>cominciano in cucina.</em></h2>
+      <p>Vincenza è la nostra "zia" cilentana. Abita e cucina a Marina di Camerota da tutta la vita. Non è una chef — è una cuoca vera, nel senso più semplice del termine. Conosce ogni pianta, ogni stagione, ogni piatto che questa terra produce da secoli.</p>
+      <p>Con Wild Table entra in cucina con voi. Non fa una dimostrazione. Vi mette le mani in pasta — letteralmente — e vi insegna quello che i ristoranti non vi daranno mai: la ricetta di casa, quella tramandata, quella senza trucchi.</p>
+      <p>La sera cucinate insieme quello che avete imparato, poi lo mangiate fuori sotto le stelle con il vino del Cilento.</p>
+      <div class="piatti">
+        <div class="piatti-label">Cosa si cucina</div>
+        <div class="piatto"><strong>Cavatielli</strong> — la pasta fresca cilentana, formata a mano con le dita</div>
+        <div class="piatto"><strong>Mulignane mbuttunate</strong> — melanzane ripiene secondo la ricetta di famiglia</div>
+        <div class="piatto"><strong>Piatti di stagione</strong> — quello che la terra dà quel giorno</div>
+      </div>
+    </div>
+    <div>
+      <img class="vincenza-img" src="vincenza.webp" width="900" height="1600" loading="lazy" decoding="async" alt="Vincenza, cuoca cilentana di Monte di Luna">
+    </div>
+  </div>
+  <div class="lezione">
+    <h3 class="lezione-title">La lezione di cucina</h3>
+    <p class="lezione-intro">La cooking class con Vincenza non è un corso. È un pomeriggio in cucina con una cilentana che sa fare cose che voi non sapete fare — e ve le insegna senza fronzoli.</p>
+    <div class="steps-grid">
       <div class="step">
         <div class="step-num">01</div>
         <div class="step-content">
@@ -766,180 +784,30 @@
         </div>
       </div>
     </div>
-    <div>
-      <img class="cooking-img" src="cala-sorgente.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Marina di Camerota vista dalle colline, con la torre e il mare">
-
-    </div>
   </div>
 </section>
 
-<!-- DATE DISPONIBILI -->
-<section class="date-section" id="date">
-  <div class="section-label">Prossimi weekend</div>
-  <h2>Quando ci <em>vediamo?</em></h2>
-  <p class="date-intro" id="dateIntro">I weekend sono a numero chiuso — solo 8 persone. Scegli la data e scrivici per prenotare il tuo posto.</p>
-  <!--
-    COME AGGIUNGERE UNA DATA: copia un blocco "date-card" e cambia solo
-    data-inizio (il venerdì) e data-fine (la domenica), formato AAAA-MM-GG,
-    e data-stato ("aperto" oppure "ultimi"). Mese, giorni della settimana e
-    menu del modulo si aggiornano da soli; le date passate spariscono da sole.
-  -->
-  <div class="date-grid" id="dateGrid">
-    <div class="date-card" data-inizio="2026-06-20" data-fine="2026-06-22" data-stato="aperto"></div>
-    <div class="date-card" data-inizio="2026-07-11" data-fine="2026-07-13" data-stato="ultimi"></div>
-    <div class="date-card" data-inizio="2026-07-25" data-fine="2026-07-27" data-stato="aperto"></div>
-    <div class="date-card" data-inizio="2026-08-08" data-fine="2026-08-10" data-stato="ultimi"></div>
-    <div class="date-card" data-inizio="2026-08-22" data-fine="2026-08-24" data-stato="aperto"></div>
-    <div class="date-card date-card--cta">
-      <div class="date-month" id="dateCtaMonth">Altre date</div>
-      <div class="date-range" id="dateCtaRange">Nuovi weekend in arrivo</div>
-      <div class="date-type">Scrivici per essere avvisato appena escono</div>
-      <a href="https://wa.me/393491751853?text=Ciao%20Ugo%2C%20vorrei%20essere%20avvisato%20quando%20escono%20le%20nuove%20date%20di%20Wild%20Table%20Cilento." class="date-notify" target="_blank" rel="noopener">Avvisami su WhatsApp →</a>
-    </div>
-  </div>
-  <p class="date-note">Ogni pacchetto (The Experience, Long Weekend, Self Drive) è disponibile per tutte le date — scrivici indicando la tua preferenza.</p>
-</section>
-
-
-<!-- VINCENZA -->
-<section class="vincenza" id="vincenza">
-  <div class="vincenza-grid">
+<!-- 5 · IL TERRITORIO -->
+<section class="territorio" id="territorio">
+  <div class="territorio-grid">
     <div>
-      <div class="section-label">Chi è Vincenza</div>
-      <h2>Cinquant'anni<br>di cucina <em>cilentana.</em></h2>
-      <p>Vincenza è la nostra "zia" cilentana. Abita e cucina a Marina di Camerota da tutta la vita. Non è una chef — è una cuoca vera, nel senso più semplice del termine. Conosce ogni pianta, ogni stagione, ogni piatto che questa terra produce da secoli.</p>
-      <p>Con Wild Table entra in cucina con voi. Non fa una dimostrazione. Vi mette le mani in pasta — letteralmente — e vi insegna quello che i ristoranti non vi daranno mai: la ricetta di casa, quella tramandata, quella senza trucchi.</p>
-      <p>La sera cucinate insieme quello che avete imparato, poi lo mangiate fuori sotto le stelle con il vino del Cilento.</p>
-      <div class="piatti">
-        <div class="piatti-label">Cosa si cucina</div>
-        <div class="piatto"><strong>Cavatielli</strong> — la pasta fresca cilentana, formata a mano con le dita</div>
-        <div class="piatto"><strong>Mulignane mbuttunate</strong> — melanzane ripiene secondo la ricetta di famiglia</div>
-        <div class="piatto"><strong>Piatti di stagione</strong> — quello che la terra dà quel giorno</div>
-      </div>
+      <div class="section-label">Il territorio</div>
+      <h2>Marina di Camerota, <em>il punto di partenza.</em></h2>
+      <p class="territorio-lead">Tra il mare del Cilento, i sentieri del Parco Nazionale e gli uliveti che disegnano il paesaggio, Monte di Luna è il luogo da cui comincia questa esperienza.</p>
+      <p>Wild Table è un weekend organizzato per solo 8 persone, in una villa privata a Monte di Luna, Marina di Camerota, nel cuore del Parco Nazionale del Cilento.</p>
+      <p>Non prenoti una camera. Il driver ti aspetta in stazione venerdì sera e da lì ogni cosa è già pensata: dove dormi, cosa mangi, dove vai, chi ti guida. Torni a casa con qualche ricetta nuova — e probabilmente con qualcuno con cui tenerti in contatto.</p>
+      <p>Si dorme in <strong>due appartamenti</strong>. Le camere sono doppie — può capitare di condividere la stanza con uno dei compagni di viaggio. Fa parte dell'esperienza.</p>
+      <p><strong>Porti solo te stesso.</strong> Il resto è incluso.</p>
     </div>
     <div>
-      <img class="vincenza-img" src="vincenza.webp" width="900" height="1600" loading="lazy" decoding="async" alt="Vincenza, cuoca cilentana di Monte di Luna">
+      <img class="territorio-img" src="cala-sorgente.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Marina di Camerota vista dalle colline, con la torre e il mare">
     </div>
   </div>
-</section>
 
-<!-- PROGRAMMA -->
-<section class="programma" id="programma">
-  <div class="section-label">Il programma</div>
-  <h2>Il weekend.<br><em>Come dovrebbe essere.</em></h2>
-  <div class="giorni">
-
-    <div class="giorno">
-      <div class="giorno-header">
-        <span class="giorno-tag">Giovedì sera · solo Long Weekend</span>
-        <span class="giorno-title">L'arrivo anticipato</span>
-      </div>
-      <ul class="attivita">
-        <li><span class="dot"></span>Il driver vi aspetta alla stazione di Pisciotta-Palinuro</li>
-        <li><span class="dot"></span>Check-in in villa a Monte di Luna</li>
-        <li><span class="dot"></span>Serata libera — il Cilento inizia qui</li>
-      </ul>
-    </div>
-
-    <div class="giorno">
-      <div class="giorno-header">
-        <span class="giorno-tag">Venerdì sera</span>
-        <span class="giorno-title">L'arrivo</span>
-      </div>
-      <ul class="attivita">
-        <li><span class="dot"></span>Il driver vi aspetta alla stazione di Pisciotta-Palinuro</li>
-        <li><span class="dot"></span>Venti minuti di colline e ulivi fino a Monte di Luna</li>
-        <li><span class="dot"></span>Aperitivo sul terrazzo: salumi, formaggi e prodotti locali</li>
-        <li><span class="dot"></span>Serata libera a Marina di Camerota</li>
-      </ul>
-    </div>
-
-    <div class="giorno">
-      <div class="giorno-header">
-        <span class="giorno-tag">Sabato</span>
-        <span class="giorno-title">Il giorno pieno</span>
-      </div>
-      <ul class="attivita">
-        <li><span class="dot"></span>Yoga tra gli ulivi con insegnante — prima che arrivi il calore</li>
-        <li><span class="dot"></span>Colazione a Monte di Luna con vista sul golfo</li>
-        <li><span class="dot"></span>Trekking guidato verso Cala Bianca nel Parco Nazionale</li>
-        <li><span class="dot"></span>Ritorno in barca: grotte marine e tuffo nell'Area Marina Protetta</li>
-        <li><span class="dot"></span>Lezione di cucina con Vincenza — cavatielli e mulignane mbuttunate</li>
-        <li><span class="dot"></span>Cena sotto le stelle con quello che avete cucinato</li>
-      </ul>
-    </div>
-
-    <div class="giorno">
-      <div class="giorno-header">
-        <span class="giorno-tag">Domenica</span>
-        <span class="giorno-title">Il mare e la lentezza</span>
-      </div>
-      <ul class="attivita">
-        <li><span class="dot"></span>Yoga e colazione lenta</li>
-        <li><span class="dot"></span>Ultimo tuffo o passeggiata sul lungomare di Marina di Camerota</li>
-        <li><span class="dot"></span>Il driver vi riporta alla stazione · <em>fine del weekend base</em></li>
-        <li><span class="dot"></span>Chi resta: pomeriggio libero, cena in paese</li>
-      </ul>
-    </div>
-
-    <div class="giorno">
-      <div class="giorno-header">
-        <span class="giorno-tag">Lunedì mattina · solo Long Weekend</span>
-        <span class="giorno-title">L'ultima colazione</span>
-      </div>
-      <ul class="attivita">
-        <li><span class="dot"></span>Colazione lenta sul terrazzo</li>
-        <li><span class="dot"></span>Il driver vi riporta alla stazione entro le 11</li>
-        <li><span class="dot"></span>Voli del lunedì: Torino, Bergamo, Verona, Catania</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="faq">
-  <div class="section-label">Domande frequenti</div>
-  <h2>Tutto quello<br>che vuoi <em>sapere.</em></h2>
-  <div class="faq-list">
-    <div class="faq-item">
-      <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq1">Cos'è il Long Weekend e per chi è pensato?</button></h3>
-      <div class="faq-body" id="faq1">È il formato Giovedì–Lunedì a 610€, pensato per chi viene da lontano — Torino, Bergamo, Verona, Catania — o dall'estero. I voli verso Salerno o Napoli si concentrano su venerdì e lunedì: arrivare giovedì e ripartire lunedì elimina la corsa. Il programma delle attività è identico al weekend base (venerdì–domenica). Giovedì sera e lunedì mattina sono liberi.</div>
-    </div>
-    <div class="faq-item">
-      <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq2">Devo saper cucinare?</button></h3>
-      <div class="faq-body" id="faq2">No. Vincenza parte da zero. L'unica cosa che serve è la voglia di sporcarsi le mani.</div>
-    </div>
-    <div class="faq-item">
-      <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq3">Posso venire da solo?</button></h3>
-      <div class="faq-body" id="faq3">Sì, molti vengono da soli. Il gruppo è piccolo — 8 persone al massimo — ci si conosce davvero. Le camere sono doppie: se vieni da solo potresti condividere la stanza con un compagno d'avventura.</div>
-    </div>
-    <div class="faq-item">
-      <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq4">Come arrivo a Marina di Camerota?</button></h3>
-      <div class="faq-body" id="faq4">In treno fino a Pisciotta-Palinuro — da Napoli è un Intercity diretto, da Roma circa 3h40. In aereo fino a Salerno Costa d'Amalfi, poi treno. Con The Experience il driver vi aspetta in stazione: niente macchina, niente parcheggio, niente stress.</div>
-    </div>
-    <div class="faq-item">
-      <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq5">Quando si paga?</button></h3>
-      <div class="faq-body" id="faq5">Prima si parla. Nessun pagamento anticipato — ti rispondo entro 24 ore e concorderemo tutto.</div>
-    </div>
-    <div class="faq-item">
-      <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq6">E se ho intolleranze alimentari?</button></h3>
-      <div class="faq-body" id="faq6">Nessun problema. Vincenza cucina con quello che la terra dà — segnalalo nel modulo di prenotazione.</div>
-    </div>
-    <div class="faq-item">
-      <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq7">Politica di cancellazione?</button></h3>
-      <div class="faq-body" id="faq7">Cancellazione gratuita fino a 30 giorni prima. Sotto i 30 giorni la quota non è rimborsabile, ma il posto è trasferibile a un'altra persona o spostabile a una data futura.</div>
-    </div>
-  </div>
-</section>
-
-<!-- COME ARRIVARE -->
-<section class="come-arrivare" id="come-arrivare">
-  <div class="section-label">Logistica</div>
-  <h2>Il Cilento è più vicino<br><em>di quanto credi.</em></h2>
-  <p class="arrivare-intro">Niente auto, niente parcheggio. Il driver ti aspetta in stazione. Bastano un volo low cost o un Frecciarossa.</p>
-
-  <div class="arrivare-grid">
+  <div class="arrivare" id="come-arrivare">
+    <h3 class="arrivare-title">Il Cilento è più vicino di quanto credi.</h3>
+    <p class="arrivare-intro">Niente auto, niente parcheggio. Il driver ti aspetta in stazione. Bastano un volo low cost o un Frecciarossa.</p>
+    <div class="arrivare-grid">
 
     <div class="arrivare-card">
       <div class="arrivare-icon">✈</div>
@@ -975,20 +843,240 @@
     </div>
 
   </div>
-
-  <div class="arrivare-nota">
+    <div class="arrivare-nota">
     <span>🚐</span>
     <div><strong>Il driver ti aspetta in stazione.</strong> Con The Experience e Long Weekend, il trasferimento dalla stazione di Pisciotta-Palinuro alla villa è incluso — venerdì sera e domenica mattina (o lunedì per il Long Weekend). Niente noleggio, niente parcheggio, niente stress.</div>
   </div>
+  </div>
 </section>
 
-<!-- PRENOTA -->
-<section class="prenota" id="prenota">
+<!-- 6 · IL PROGRAMMA -->
+<section class="programma" id="programma">
+  <div class="section-label">Il programma</div>
+  <h2>Tre giorni, <em>senza fretta.</em></h2>
+  <div class="timeline">
+      <div class="giorno">
+        <div class="giorno-header">
+          <span class="giorno-tag">Giovedì sera · solo Long Weekend</span>
+          <span class="giorno-title">L'arrivo anticipato</span>
+        </div>
+        <ul class="attivita">
+          <li><span class="dot"></span><span>Il driver vi aspetta alla stazione di Pisciotta-Palinuro</span></li>
+          <li><span class="dot"></span><span>Check-in in villa a Monte di Luna</span></li>
+          <li><span class="dot"></span><span>Serata libera — il Cilento inizia qui</span></li>
+        </ul>
+      </div>
+      <div class="giorno">
+        <div class="giorno-header">
+          <span class="giorno-tag">Venerdì sera</span>
+          <span class="giorno-title">L'arrivo</span>
+        </div>
+        <ul class="attivita">
+          <li><span class="dot"></span><span>Il driver vi aspetta alla stazione di Pisciotta-Palinuro</span></li>
+          <li><span class="dot"></span><span>Venti minuti di colline e ulivi fino a Monte di Luna</span></li>
+          <li><span class="dot"></span><span>Aperitivo sul terrazzo: salumi, formaggi e prodotti locali</span></li>
+          <li><span class="dot"></span><span>Serata libera a Marina di Camerota</span></li>
+        </ul>
+      </div>
+      <div class="giorno">
+        <div class="giorno-header">
+          <span class="giorno-tag">Sabato</span>
+          <span class="giorno-title">Il giorno pieno</span>
+        </div>
+        <ul class="attivita">
+          <li><span class="dot"></span><span>Colazione a Monte di Luna con vista sul golfo</span></li>
+          <li><span class="dot"></span><span>Trekking guidato verso Cala Bianca nel Parco Nazionale</span></li>
+          <li><span class="dot"></span><span>Ritorno in barca: grotte marine e tuffo nell'Area Marina Protetta</span></li>
+          <li><span class="dot"></span><span>Lezione di cucina con Vincenza — cavatielli e mulignane mbuttunate</span></li>
+          <li><span class="dot"></span><span>Cena sotto le stelle con quello che avete cucinato</span></li>
+        </ul>
+      </div>
+      <div class="giorno">
+        <div class="giorno-header">
+          <span class="giorno-tag">Domenica</span>
+          <span class="giorno-title">Il mare e la lentezza</span>
+        </div>
+        <ul class="attivita">
+          <li><span class="dot"></span><span>Colazione lenta</span></li>
+          <li><span class="dot"></span><span>Ultimo tuffo o passeggiata sul lungomare di Marina di Camerota</span></li>
+          <li><span class="dot"></span><span>Il driver vi riporta alla stazione · <em>fine del weekend base</em></span></li>
+          <li><span class="dot"></span><span>Chi resta: pomeriggio libero, cena in paese</span></li>
+        </ul>
+      </div>
+      <div class="giorno">
+        <div class="giorno-header">
+          <span class="giorno-tag">Lunedì mattina · solo Long Weekend</span>
+          <span class="giorno-title">L'ultima colazione</span>
+        </div>
+        <ul class="attivita">
+          <li><span class="dot"></span><span>Colazione lenta sul terrazzo</span></li>
+          <li><span class="dot"></span><span>Il driver vi riporta alla stazione entro le 11</span></li>
+          <li><span class="dot"></span><span>Voli del lunedì: Torino, Bergamo, Verona, Catania</span></li>
+        </ul>
+      </div>
+  </div>
+</section>
+
+<!-- 7 · I PACCHETTI -->
+<section class="pacchetti" id="pacchetti">
+  <div class="section-label">I pacchetti</div>
+  <h2>Scegli il tuo modo di <em>vivere il Cilento.</em></h2>
+  <p class="section-intro">Tre proposte per esigenze diverse.</p>
+  <div class="cards cards-3">
+    <div class="card">
+      <div class="card-tag">Per chi viaggia in autonomia</div>
+      <h3>Self Drive</h3>
+      <div class="card-price"><sup>€</sup>340</div>
+      <div class="card-note">a persona · 2 notti</div>
+      <p class="card-desc">Per chi preferisce raggiungere Marina di Camerota con la propria auto.</p>
+      <details class="card-details">
+        <summary>Scopri cosa comprende</summary>
+        <ul>
+        <li>2 notti in villa a Monte di Luna</li>
+        <li>Colazioni incluse</li>
+        <li>Lezione di cucina con Vincenza</li>
+        <li>Cena condivisa con vino cilentano</li>
+        <li>Trekking nel Parco Nazionale del Cilento</li>
+        <li>Gita in barca nell'Area Marina Protetta</li>
+        <li class="non-incluso">Transfer non incluso</li>
+      </ul>
+      </details>
+      <a href="#partecipa" class="btn-primary" data-pacchetto="Self Drive — 340€ (con la tua auto)">Voglio partecipare</a>
+    </div>
+    <div class="card card-featured">
+      <div class="card-tag">L'esperienza completa</div>
+      <h3>The Experience</h3>
+      <div class="card-price"><sup>€</sup>440</div>
+      <div class="card-note">a persona · 2 notti</div>
+      <p class="card-desc">Per chi vuole vivere il weekend con le esperienze e i servizi previsti dal pacchetto.</p>
+      <details class="card-details">
+        <summary>Scopri cosa comprende</summary>
+        <ul>
+        <li>Transfer privato stazione–villa, andata e ritorno</li>
+        <li>2 notti in villa a Monte di Luna</li>
+        <li>Colazioni incluse</li>
+        <li>Lezione di cucina con Vincenza</li>
+        <li>Cena condivisa con vino cilentano</li>
+        <li>Trekking guidato verso Cala Bianca</li>
+        <li>Gita in barca nell'Area Marina Protetta</li>
+      </ul>
+      </details>
+      <a href="#partecipa" class="btn-primary" data-pacchetto="The Experience — 440€ (con transfer)">Voglio partecipare</a>
+    </div>
+    <div class="card">
+      <div class="card-tag">Per chi vuole fermarsi più a lungo</div>
+      <h3>Long Weekend</h3>
+      <div class="card-price"><sup>€</sup>610</div>
+      <div class="card-note">a persona · 4 notti</div>
+      <p class="card-desc">Per chi vuole concedersi più tempo nel Cilento.</p>
+      <details class="card-details">
+        <summary>Scopri cosa comprende</summary>
+        <ul>
+        <li>Transfer privato stazione–villa, andata e ritorno</li>
+        <li>4 notti in villa a Monte di Luna</li>
+        <li>Colazioni incluse</li>
+        <li>Lezione di cucina con Vincenza</li>
+        <li>Cena condivisa con vino cilentano</li>
+        <li>Trekking guidato verso Cala Bianca</li>
+        <li>Gita in barca nell'Area Marina Protetta</li>
+        <li>Giovedì e lunedì liberi — il Cilento senza fretta</li>
+      </ul>
+      </details>
+      <a href="#partecipa" class="btn-primary" data-pacchetto="Long Weekend — 610€ (giovedì→lunedì, con transfer)">Voglio partecipare</a>
+    </div>
+  </div>
+</section>
+
+<section class="date-section" id="date">
+  <div class="section-label">Prossimi weekend</div>
+  <h2>Quando ci <em>vediamo?</em></h2>
+  <p class="date-intro" id="dateIntro">I weekend sono a numero chiuso — solo 8 persone. Scegli la data e scrivici per prenotare il tuo posto.</p>
+  <!--
+    COME AGGIUNGERE UNA DATA: copia un blocco "date-card" e cambia solo
+    data-inizio (il venerdì) e data-fine (la domenica), formato AAAA-MM-GG,
+    e data-stato ("aperto" oppure "ultimi"). Mese, giorni della settimana e
+    menu del modulo si aggiornano da soli; le date passate spariscono da sole.
+  -->
+  <div class="date-grid" id="dateGrid">
+    <div class="date-card" data-inizio="2026-06-20" data-fine="2026-06-22" data-stato="aperto"></div>
+    <div class="date-card" data-inizio="2026-07-11" data-fine="2026-07-13" data-stato="ultimi"></div>
+    <div class="date-card" data-inizio="2026-07-25" data-fine="2026-07-27" data-stato="aperto"></div>
+    <div class="date-card" data-inizio="2026-08-08" data-fine="2026-08-10" data-stato="ultimi"></div>
+    <div class="date-card" data-inizio="2026-08-22" data-fine="2026-08-24" data-stato="aperto"></div>
+    <div class="date-card date-card--cta">
+      <div class="date-month" id="dateCtaMonth">Altre date</div>
+      <div class="date-range" id="dateCtaRange">Nuovi weekend in arrivo</div>
+      <div class="date-type">Scrivici per essere avvisato appena escono</div>
+      <a href="https://wa.me/393491751853?text=Ciao%20Ugo%2C%20vorrei%20essere%20avvisato%20quando%20escono%20le%20nuove%20date%20di%20Wild%20Table%20Cilento." class="date-notify" target="_blank" rel="noopener">Avvisami su WhatsApp →</a>
+    </div>
+  </div>
+  <p class="date-note">Ogni pacchetto (The Experience, Long Weekend, Self Drive) è disponibile per tutte le date — scrivici indicando la tua preferenza.</p>
+</section>
+
+<!-- 8 · INFORMAZIONI PRATICHE -->
+<section class="faq" id="informazioni">
+  <div class="section-label">Informazioni pratiche</div>
+  <h2>Prima di partire, <em>tutto quello che c'è da sapere.</em></h2>
+  <div class="faq-groups">
+    <div class="faq-group">
+      <h3 class="faq-group-title">Il soggiorno e le camere</h3>
+      <div class="faq-list">
+    <div class="faq-item">
+      <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq3">Posso venire da solo?</button></h3>
+      <div class="faq-body" id="faq3">Sì, molti vengono da soli. Il gruppo è piccolo — 8 persone al massimo — ci si conosce davvero. Le camere sono doppie: se vieni da solo potresti condividere la stanza con un compagno d'avventura.</div>
+    </div>
+    <div class="faq-item">
+      <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq6">E se ho intolleranze alimentari?</button></h3>
+      <div class="faq-body" id="faq6">Nessun problema. Vincenza cucina con quello che la terra dà — segnalalo nel modulo di prenotazione.</div>
+    </div>
+      </div>
+    </div>
+    <div class="faq-group">
+      <h3 class="faq-group-title">Le attività e il programma</h3>
+      <div class="faq-list">
+    <div class="faq-item">
+      <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq2">Devo saper cucinare?</button></h3>
+      <div class="faq-body" id="faq2">No. Vincenza parte da zero. L'unica cosa che serve è la voglia di sporcarsi le mani.</div>
+    </div>
+    <div class="faq-item">
+      <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq1">Cos'è il Long Weekend e per chi è pensato?</button></h3>
+      <div class="faq-body" id="faq1">È il formato Giovedì–Lunedì a 610€, pensato per chi viene da lontano — Torino, Bergamo, Verona, Catania — o dall'estero. I voli verso Salerno o Napoli si concentrano su venerdì e lunedì: arrivare giovedì e ripartire lunedì elimina la corsa. Il programma delle attività è identico al weekend base (venerdì–domenica). Giovedì sera e lunedì mattina sono liberi.</div>
+    </div>
+      </div>
+    </div>
+    <div class="faq-group">
+      <h3 class="faq-group-title">Come arrivare e muoversi</h3>
+      <div class="faq-list">
+    <div class="faq-item">
+      <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq4">Come arrivo a Marina di Camerota?</button></h3>
+      <div class="faq-body" id="faq4">In treno fino a Pisciotta-Palinuro — da Napoli è un Intercity diretto, da Roma circa 3h40. In aereo fino a Salerno Costa d'Amalfi, poi treno. Con The Experience il driver vi aspetta in stazione: niente macchina, niente parcheggio, niente stress.</div>
+    </div>
+      </div>
+    </div>
+    <div class="faq-group">
+      <h3 class="faq-group-title">Prezzi, pagamenti e cancellazioni</h3>
+      <div class="faq-list">
+    <div class="faq-item">
+      <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq5">Quando si paga?</button></h3>
+      <div class="faq-body" id="faq5">Prima si parla. Nessun pagamento anticipato — ti rispondo entro 24 ore e concorderemo tutto.</div>
+    </div>
+    <div class="faq-item">
+      <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq7">Politica di cancellazione?</button></h3>
+      <div class="faq-body" id="faq7">Cancellazione gratuita fino a 30 giorni prima. Sotto i 30 giorni la quota non è rimborsabile, ma il posto è trasferibile a un'altra persona o spostabile a una data futura.</div>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · MANIFESTAZIONE DI INTERESSE -->
+<section class="prenota" id="partecipa">
   <div class="prenota-grid">
     <div class="prenota-info">
-      <div class="section-label">Prenota</div>
-      <h2>Solo 8 posti.<br>Il tuo è <em>ancora libero?</em></h2>
-      <p>Compila il modulo. Ti rispondo personalmente entro 24 ore. Nessun pagamento anticipato — prima parliamo.</p>
+      <div class="section-label">Manifestazione di interesse</div>
+      <h2>Il Cilento ti aspetta. <em>Tu devi solo scegliere di viverlo.</em></h2>
+      <p>Otto persone, tre giorni e un territorio da scoprire attraverso esperienze autentiche.</p>
+      <p>Lasciaci i tuoi contatti. Ti aggiorneremo sulle prossime date e potrai decidere se partire.</p>
       <div class="info-box" style="margin-top:28px;">
         <h3>Nessun impegno</h3>
         <p>Scrivi, ti rispondo, decidi. Non ti chiedo nulla finché non sei sicuro.</p>
@@ -1003,7 +1091,8 @@
       </a>
     </div>
     <div>
-      <form id="contactForm" novalidate>
+      <form id="contactForm" name="interesse" method="POST" action="/grazie.html" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="interesse">
         <div class="form-row">
           <div class="field">
             <label for="nome">Nome</label>
@@ -1029,9 +1118,9 @@
           <label for="pacchetto">Pacchetto</label>
           <select id="pacchetto" name="pacchetto" required>
             <option value="" disabled selected>Scegli il pacchetto</option>
+            <option>Self Drive — 340€ (con la tua auto)</option>
             <option>The Experience — 440€ (con transfer)</option>
             <option>Long Weekend — 610€ (giovedì→lunedì, con transfer)</option>
-            <option>Self Drive — 340€ (con la tua auto)</option>
           </select>
         </div>
         <div class="form-row">
@@ -1059,12 +1148,12 @@
         </div>
         <!-- Campo trappola anti-spam: invisibile alle persone, i bot lo compilano -->
         <div class="hp" aria-hidden="true">
-          <label for="_honey">Non compilare</label>
-          <input type="text" id="_honey" name="_honey" tabindex="-1" autocomplete="off">
+          <label for="bot-field">Non compilare</label>
+          <input type="text" id="bot-field" name="bot-field" tabindex="-1" autocomplete="off">
         </div>
-        <p class="form-privacy">Inviando la richiesta accetti che i tuoi dati vengano usati solo per risponderti, come spiegato nell'<a href="privacy.html">informativa privacy</a>.</p>
+        <p class="form-privacy">La manifestazione di interesse non comporta alcun obbligo di prenotazione. Inviandola accetti che i tuoi dati vengano usati solo per risponderti, come spiegato nell'<a href="privacy.html">informativa privacy</a>.</p>
         <div class="form-error" id="formError" role="alert"></div>
-        <button type="submit" class="form-btn">Mettimi in lista →</button>
+        <button type="submit" class="form-btn">Manifesto il mio interesse</button>
       </form>
     </div>
   </div>
@@ -1073,7 +1162,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="logo">Wild <em>Table</em> Cilento · Monte di Luna, Marina di Camerota (SA)</div>
+  <div class="logo">Wild <em>Table</em> Cilento · Cucina. Natura. Mare.<br><span style="font-family:Inter,sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.7)">Monte di Luna, Marina di Camerota (SA)</span></div>
   <div style="font-size:0.78rem; line-height:1.8;">
     Parco Nazionale del Cilento · Patrimonio UNESCO<br>
     <strong style="color:rgba(255,255,255,0.85);">Politica di cancellazione</strong> — Gratuita fino a 30 giorni prima. Il posto è trasferibile.<br>
@@ -1120,7 +1209,7 @@ const store = {
   set(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
 };
 const contactForm = $('contactForm');
-const prenotaSection = $('prenota');
+const prenotaSection = $('partecipa');
 let lastAnchorClick = 0;
 document.addEventListener('click', e => { if (e.target.closest('a[href^="#"]')) lastAnchorClick = Date.now(); });
 
@@ -1181,9 +1270,8 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) heroVideo.pau
     });
   });
 
-  if (visibili === 0) {
-    $('dateIntro').textContent = 'Le date della prossima stagione sono in arrivo. Lasciaci i tuoi dati nel modulo o scrivici su WhatsApp: ti avvisiamo appena escono.';
-  }
+  // Senza date future la sezione non compare (il modulo raccoglie comunque l'interesse)
+  if (visibili === 0) $('date').hidden = true;
 })();
 
 // ── FAQ accordion (anche da tastiera) ──
@@ -1199,7 +1287,7 @@ document.querySelectorAll('.faq-q').forEach(btn => {
   });
 });
 
-// ── Form submit — FormSubmit.co AJAX ──
+// ── Modulo — Netlify Forms ──
 const NOMI_CAMPI = { nome: 'nome', cognome: 'cognome', email: 'email', data: 'data preferita', pacchetto: 'pacchetto', persone: 'numero di persone' };
 contactForm.addEventListener('submit', async function(e) {
   e.preventDefault();
@@ -1217,41 +1305,30 @@ contactForm.addEventListener('submit', async function(e) {
     return;
   }
 
-  // Bot: se il campo trappola è compilato, fingiamo l'invio
-  if ($('_honey').value) { window.location.href = 'grazie.html'; return; }
-
   const btn = this.querySelector('.form-btn');
+  const testo = btn.textContent;
   btn.textContent = 'Invio in corso…';
   btn.disabled = true;
 
-  const v = id => $(id).value.trim();
-  const data = new FormData();
-  data.append('Nome', v('nome'));
-  data.append('Cognome', v('cognome'));
-  data.append('Email', v('email'));
-  data.append('Data preferita', v('data'));
-  data.append('Pacchetto', v('pacchetto'));
-  data.append('Persone', v('persone'));
-  data.append('Città', v('citta'));
-  data.append('Messaggio', v('messaggio'));
-  data.append('_subject', 'Prenotazione Wild Table Cilento — ' + v('nome') + ' ' + v('cognome'));
-  data.append('_template', 'table');
-  data.append('_replyto', v('email'));
-
   try {
-    const res = await fetch('https://formsubmit.co/ajax/ugoernestoleo@gmail.com', {
+    const res = await fetch('/', {
       method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(this)).toString()
     });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     window.location.href = 'grazie.html';
   } catch (err) {
-    btn.textContent = 'Mettimi in lista →';
+    btn.textContent = testo;
     btn.disabled = false;
-    errorBox.innerHTML = 'La richiesta non è partita. Riprova tra poco oppure <a href="https://wa.me/393491751853?text=Ciao%20Ugo%2C%20ho%20visto%20Wild%20Table%20Cilento%20e%20vorrei%20prenotare." target="_blank" rel="noopener">scrivici su WhatsApp</a>.';
+    errorBox.innerHTML = 'La richiesta non è partita. Riprova tra poco oppure <a href="https://wa.me/393491751853?text=Ciao%20Ugo%2C%20ho%20visto%20Wild%20Table%20Cilento%20e%20vorrei%20partecipare." target="_blank" rel="noopener">scrivici su WhatsApp</a>.';
     errorBox.classList.add('show');
   }
+});
+
+// Pulsanti "Voglio partecipare" dei pacchetti: preselezionano il pacchetto nel modulo
+document.querySelectorAll('[data-pacchetto]').forEach(a => {
+  a.addEventListener('click', () => { $('pacchetto').value = a.dataset.pacchetto; });
 });
 
 // Utilità: un elemento è sullo schermo?
