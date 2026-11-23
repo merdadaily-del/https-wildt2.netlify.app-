@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grazie — Wild Table Cilento</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --terra: #2C1810;
+    --sabbia: #F0E8D8;
+    --oro: #C4952A;
+    --bianco: #FDFAF5;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--terra);
+    color: var(--sabbia);
+    font-family: 'Jost', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 3rem;
+    opacity: 0.6;
+  }
+  .logo span { color: var(--oro); font-style: italic; }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  h1 em { color: var(--oro); font-style: italic; }
+  p {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: rgba(240,232,216,0.65);
+    max-width: 480px;
+    margin-bottom: 3rem;
+  }
+  a {
+    color: var(--oro);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(196,149,42,0.4);
+    padding-bottom: 2px;
+    transition: all 0.3s ease;
+  }
+  a:hover { border-color: var(--oro); }
+</style>
+</head>
+<body>
+  <div class="logo">Wild <span>Table</span> Cilento</div>
+  <h1>Grazie.<br><em>Ci sentiamo presto.</em></h1>
+  <p>La tua richiesta è arrivata. Ti risponderemo entro 24 ore con le date disponibili e tutti i dettagli per il tuo weekend nel Cilento.</p>
+  <a href="/">← Torna alla home</a>
+</body>
+</html>
