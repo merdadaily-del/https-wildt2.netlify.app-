@@ -1,4 +1,2 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://wildt2.netlify.app/sitemap.xml

@@ -1,0 +1,4 @@
+# Sito non ancora pubblico: nessuna pagina deve comparire sui motori di ricerca.
+# Quando vuoi essere indicizzato, elimina questo file e rimetti "index, follow" in index.html.
+/*
+  X-Robots-Tag: noindex, nofollow
