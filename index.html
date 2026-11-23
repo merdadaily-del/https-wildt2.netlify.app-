@@ -75,8 +75,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Figtree:wght@400;500;600&display=swap">
-<link rel="preload" as="image" href="barca-caletta.webp" type="image/webp">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Darumadrop+One&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="preload" as="image" href="barca-caletta.webp" type="image/webp" fetchpriority="high">
 
 <style>
   :root {
@@ -774,23 +774,344 @@
     .in-breve-grid > div, .in-breve-grid > div + div { border-left: none; padding: 14px 0; border-top: 1px solid rgba(29,33,27,0.12); }
     .vincenza-img { max-height: 70vh; }
   }
+
+  /* ══ STILE "CARTA RITAGLIATA" ══════════════════════════════════
+     Fondo bianco, titoli grandi fatti a mano, colori pieni del Mediterraneo,
+     illustrazioni ritagliate accanto alle foto vere. */
+  :root {
+    --carta: #ffffff;
+    --inchiostro: #151515;
+    --mare: #1f45c2;
+    --terracotta: #d9442b;
+    --terracotta-testo: #b5361f;
+    --ulivo: #3d8b3d;
+    --ulivo-testo: #2f6f2f;
+    --sole: #f5b301;
+    --melanzana: #4a2b6e;
+    --sabbia: #f6efe3;
+    --sabbia-scuro: #ead9bd;
+    --f-titoli: var(--f-testo);
+    --f-display: 'Darumadrop One', 'Arial Rounded MT Bold', 'Trebuchet MS', sans-serif;
+  }
+  body { background: var(--carta); color: var(--inchiostro); }
+  h1, h2, .lezione-title, .arrivare-title, .in-breve-titolo {
+    font-family: var(--f-display); font-weight: 400; text-transform: uppercase; letter-spacing: 0.01em; line-height: 0.98;
+  }
+  h2 { font-size: clamp(2.2rem, 4.6vw, 3.8rem); color: var(--inchiostro); }
+  h2 em, .hero h1 em { font-style: normal; color: var(--terracotta-testo); }
+  .section-label { color: var(--mare); }
+  .section-label::before { background: var(--mare); }
+
+  /* Illustrazioni */
+  .ill { display: block; width: 100%; height: 100%; }
+  .ill-sezione { width: clamp(84px, 9vw, 128px); height: clamp(84px, 9vw, 128px); margin-bottom: 20px; }
+
+  /* Foto */
+  .foto { margin: 0; position: relative; overflow: hidden; border-radius: 3px; background: var(--sabbia); }
+  .foto img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .foto--illustrata { display: grid; place-items: center; background: var(--sabbia); padding: 12%; }
+  .foto--vuota { display: grid; place-items: center; background: repeating-linear-gradient(45deg, var(--sabbia), var(--sabbia) 12px, #fff 12px, #fff 24px); min-height: 160px; }
+  .foto-da-fare { font: 600 0.85rem/1.4 var(--f-testo); color: var(--terracotta-testo); text-align: center; padding: 8px; background: rgba(255,255,255,0.9); }
+  .foto--illustrata .foto-da-fare { position: absolute; left: 8px; right: 8px; bottom: 8px; }
+  .foto-larga { aspect-ratio: 16 / 7; margin-top: 56px; }
+
+  /* Navigazione */
+  nav { background: rgba(255,255,255,0.96); }
+  .nav-logo { font-family: var(--f-display); text-transform: uppercase; font-size: 1.35rem; letter-spacing: 0.02em; }
+  .nav-logo em { font-style: normal; color: var(--terracotta-testo); }
+  .nav-links a[aria-current="true"] { color: var(--terracotta-testo); }
+  .nav-cta a { background: var(--terracotta-testo); }
+  .nav-cta a:hover { background: #962c18; }
+
+  /* Pulsanti e link con freccia */
+  .btn-primary, .form-btn { background: var(--terracotta-testo); color: #fff; }
+  .btn-primary:hover, .form-btn:hover { background: #962c18; }
+  .link-freccia { color: var(--terracotta-testo); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; padding: 12px 0; }
+  .link-freccia::after { content: "→"; font-size: 1.3em; transition: transform 0.2s; }
+  .link-freccia:hover::after { transform: translateX(4px); }
+
+  /* Apertura: testo a sinistra, collage foto + carta a destra */
+  .hero { background: var(--carta); color: var(--inchiostro); min-height: auto; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; padding-top: 120px; padding-bottom: 72px; }
+  .hero-overlay, .hero-video, .video-toggle { display: none !important; }
+  .hero-content { position: static; }
+  .hero-eyebrow { color: var(--mare); opacity: 1; letter-spacing: 0.08em; font-weight: 600; }
+  .hero h1 { font-family: var(--f-display); font-size: clamp(2.6rem, 5.6vw, 5rem); line-height: 0.95; max-width: 14ch; color: var(--inchiostro); letter-spacing: 0.005em; }
+  .hero-sub { color: #2b2b2b; opacity: 1; font-size: 1.1rem; max-width: 50ch; }
+  .hero-note { color: #4a4a4a; opacity: 1; }
+  .hero-actions { gap: 24px; }
+  .hero-collage { position: relative; }
+  .hero-collage .foto { aspect-ratio: 4 / 5; }
+  .ill-hero-sole { position: absolute; width: 36%; height: auto; aspect-ratio: 1; top: -9%; right: -8%; }
+  .ill-hero-pesce { position: absolute; width: 46%; height: auto; aspect-ratio: 2; bottom: -5%; left: -16%; }
+
+  /* Riepilogo */
+  .in-breve { background: var(--sabbia); border: none; }
+  .in-breve-titolo { font-size: clamp(1.8rem, 3vw, 2.4rem); color: var(--mare); }
+  .in-breve-grid dt { color: var(--terracotta-testo); }
+  .in-breve-grid > div + div { border-left-color: rgba(21,21,21,0.15); }
+
+  /* Esperienze con foto */
+  .esperienze { background: var(--carta); }
+  .exp-card { border-top: none; padding-top: 0; }
+  .exp-card .foto { aspect-ratio: 4 / 3; margin-bottom: 18px; }
+  .exp-card h3 { font-family: var(--f-display); text-transform: uppercase; font-size: 1.6rem; line-height: 1; color: var(--mare); }
+  .exp-card .exp-card-detail { border-top-color: rgba(21,21,21,0.12); }
+
+  /* Pacchetti */
+  .pacchetti { background: var(--sabbia); }
+  .pacchetti .card { border: 2px solid var(--inchiostro); border-radius: 3px; }
+  .pacchetti .card-featured { background: #16307f; border-color: #16307f; }
+  .card h3 { font-family: var(--f-display); text-transform: uppercase; font-size: 1.9rem; line-height: 1; }
+  .card-price { font-family: var(--f-display); color: var(--terracotta-testo); }
+  .card-featured .card-price, .card-featured h3 { color: #fff; }
+  .card-featured .card-tag, .card-featured .card-details summary { color: var(--sole); }
+  .card-featured ul li::before { color: var(--sole); }
+  .card-featured .btn-primary { background: var(--sole); color: var(--inchiostro); }
+  .card-featured .btn-primary:hover { background: #ffc933; }
+  .card-tag { color: var(--ulivo-testo); }
+  .card-details summary { color: var(--ulivo-testo); }
+  .card ul li::before { color: var(--ulivo-testo); }
+  .aiuto-contestuale { margin-top: 28px; color: #333; }
+  .aiuto-contestuale a { color: var(--terracotta-testo); font-weight: 600; }
+
+  /* Promessa */
+  .promessa { background: var(--carta); }
+
+  /* Vincenza */
+  .vincenza { background: #16307f; }
+  .vincenza h2, .vincenza h2 em { color: #fff; }
+  .vincenza h2 em { color: var(--sole); }
+  .vincenza .section-label, .vincenza .section-label::before { color: var(--sole); background: none; }
+  .vincenza .section-label::before { background: var(--sole); }
+  .vincenza .ill-sezione { background: var(--sabbia); border-radius: 50%; padding: 14px; }
+  .piatti-label { color: var(--sole); }
+  .vincenza-img { border-radius: 3px; }
+
+  /* Sezioni apribili */
+  .apribile { margin-top: 48px; border-top: 2px solid currentColor; padding-top: 4px; }
+  .apribile > summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 12px; padding: 18px 0; font: 700 1.15rem var(--f-testo); }
+  .apribile > summary::-webkit-details-marker { display: none; }
+  .apribile > summary::before { content: "+"; font: 400 1.8rem/1 var(--f-display); width: 24px; color: var(--terracotta-testo); }
+  .apribile[open] > summary::before { content: "–"; }
+  .apribile-scuro { color: var(--sabbia); }
+  .apribile-scuro > summary::before { color: var(--sole); }
+  .apribile-scuro .lezione-intro { margin-bottom: 28px; }
+
+  /* Territorio e dove si dorme */
+  .territorio { background: var(--carta); }
+  .dove-dormi { font-family: var(--f-display); text-transform: uppercase; font-size: 1.7rem; line-height: 1; color: var(--mare); }
+  .territorio-foto { display: flex; flex-direction: column; gap: 12px; }
+  .territorio-foto > .foto { aspect-ratio: 3 / 2; }
+  .galleria-villa { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 12px; }
+  .galleria-villa .foto--illustrata { aspect-ratio: auto; height: 200px; }
+  .galleria-villa .foto { aspect-ratio: 1; }
+  .galleria-villa .foto--illustrata { padding: 14%; }
+  .arrivare-card--featured { background: var(--mare); }
+
+  /* Programma */
+  .programma { background: var(--sabbia); }
+  .timeline::before { background: rgba(31,69,194,0.3); }
+  .timeline .giorno::before { background: var(--mare); box-shadow: 0 0 0 2px var(--mare); border-color: var(--sabbia); }
+  .timeline .giorno-title { font-family: var(--f-display); text-transform: uppercase; font-size: 1.45rem; line-height: 1; }
+  .giorno-tag { color: var(--terracotta-testo); }
+
+  /* Informazioni pratiche */
+  .faq { background: var(--carta); }
+  .faq-group-title { color: var(--mare); border-bottom-color: var(--mare); }
+  .faq-q::after { color: var(--terracotta-testo); }
+
+  /* Partecipa */
+  .prenota { background: var(--inchiostro); }
+  .prenota h2 { color: #fff; }
+  .prenota h2 em, .prenota .section-label { color: var(--sole); }
+  .prenota .section-label::before { background: var(--sole); }
+  .prenota .ill-sezione { background: var(--sabbia); border-radius: 50%; padding: 14px; }
+  .prenota .form-btn { background: var(--sole); color: var(--inchiostro); }
+  .prenota .form-btn:hover { background: #ffc933; }
+  .info-box { background: rgba(255,255,255,0.06); }
+  input:focus, select:focus, textarea:focus { border-color: var(--sole); box-shadow: 0 0 0 2px rgba(245,179,1,0.4); }
+  .campo-errore { font-size: 0.82rem; color: #ffb4a6; min-height: 0; }
+  .field [aria-invalid="true"] { border-color: #ff8f7a; }
+  .bozza-ripresa { font-size: 0.82rem; color: rgba(255,255,255,0.75); }
+
+  footer { background: #0c0c0c; }
+  footer .logo { font-family: var(--f-display); text-transform: uppercase; }
+  footer .logo em { font-style: normal; color: var(--sole); }
+
+  /* Barra fissa su telefono */
+  .barra-mobile { display: none; }
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; gap: 40px; padding-top: 96px; padding-bottom: 56px; }
+    .hero h1 { font-size: clamp(2.4rem, 11vw, 3.2rem); }
+    .hero-collage { margin: 0 12px; }
+    .hero-collage .foto { aspect-ratio: 4 / 3; }
+    .ill-hero-pesce { left: -8%; }
+    .hero-note { padding-right: 0; }
+    .galleria-villa { gap: 8px; }
+    .galleria-villa .foto--illustrata { height: 150px; }
+    .foto-larga { aspect-ratio: 4 / 3; margin-top: 36px; }
+    .nav-cta { display: none; }
+    .wa-fixed { display: none; }
+    .barra-mobile {
+      display: grid; grid-template-columns: 1fr 1.6fr 56px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 250;
+      background: #fff; border-top: 1px solid rgba(0,0,0,0.12); box-shadow: 0 -4px 16px rgba(0,0,0,0.06);
+      padding: 8px max(10px, env(safe-area-inset-right, 0px)) calc(8px + env(safe-area-inset-bottom, 0px)) max(10px, env(safe-area-inset-left, 0px)); gap: 8px;
+    }
+    .barra-mobile a { display: flex; align-items: center; justify-content: center; min-height: 48px; font-weight: 700; text-decoration: none; color: var(--inchiostro); border: 2px solid var(--inchiostro); border-radius: 3px; }
+    .barra-mobile .barra-primaria { background: var(--terracotta-testo); border-color: var(--terracotta-testo); color: #fff; }
+    .barra-mobile .barra-wa { background: #1a7f4b; border-color: #1a7f4b; }
+    .barra-mobile .barra-wa svg { width: 26px; height: 26px; fill: #fff; }
+    body { padding-bottom: 72px; }
+    .toast { bottom: 84px; right: 12px; }
+  }
 </style>
+<script>
+// Foto non ancora caricate: al loro posto un'illustrazione, oppure niente.
+// Aggiungi ?foto all'indirizzo per vedere dove vanno le foto da fare.
+function fotoMancante(img) {
+  var fig = img.closest('figure'); if (!fig) return;
+  var anteprima = /[?&]foto\b/.test(location.search);
+  var nome = img.getAttribute('src');
+  if (fig.dataset.ill) {
+    fig.classList.add('foto--illustrata');
+    fig.innerHTML = '<svg class="ill" aria-hidden="true" focusable="false"><use href="#' + fig.dataset.ill + '"/></svg>' +
+      (anteprima ? '<figcaption class="foto-da-fare">Foto da fare: ' + nome + '</figcaption>' : '');
+  } else if (anteprima) {
+    fig.classList.add('foto--vuota');
+    fig.innerHTML = '<figcaption class="foto-da-fare">Foto da fare:<br>' + nome + '<br><small>' + img.alt + '</small></figcaption>';
+  } else {
+    fig.hidden = true;
+  }
+}
+</script>
 </head>
 <body>
+<!-- ILLUSTRAZIONI: forme piatte "a carta ritagliata", originali per Wild Table. Si usano con <svg><use href="#ill-..."/></svg> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="carta" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+
+    <!-- Gozzo sul mare -->
+    <symbol id="ill-barca" viewBox="0 0 220 200">
+      <g filter="url(#carta)">
+        <path d="M14 118 Q110 140 206 112 L186 152 Q110 172 36 156 Z" fill="var(--terracotta)"/>
+        <path d="M22 124 Q110 144 200 118 L196 128 Q110 152 27 134 Z" fill="var(--mare)"/>
+        <rect x="88" y="86" width="44" height="30" rx="3" fill="var(--inchiostro)"/>
+        <rect x="104" y="30" width="5" height="58" fill="var(--inchiostro)"/>
+        <path d="M112 34 L150 80 L112 80 Z" fill="var(--sole)"/>
+        <path d="M0 176 Q20 164 40 176 T80 176 T120 176 T160 176 T200 176 T240 176 V200 H0 Z" fill="var(--mare)"/>
+      </g>
+    </symbol>
+
+    <!-- Sole -->
+    <symbol id="ill-sole" viewBox="0 0 120 120">
+      <g filter="url(#carta)">
+        <circle cx="60" cy="60" r="34" fill="var(--sole)"/>
+        <g fill="var(--sole)">
+          <path d="M57 2 h7 l-2 16 h-3z"/><path d="M57 118 h7 l-2 -16 h-3z"/>
+          <path d="M2 57 v7 l16 -2 v-3z"/><path d="M118 57 v7 l-16 -2 v-3z"/>
+          <path d="M17 13 l5 -5 l9 13 l-2 2z"/><path d="M103 107 l5 -5 l-13 -9 l-2 2z"/>
+          <path d="M107 17 l-5 -5 l-9 13 l2 2z"/><path d="M13 103 l5 5 l9 -13 l-2 -2z"/>
+        </g>
+      </g>
+    </symbol>
+
+    <!-- Pesce -->
+    <symbol id="ill-pesce" viewBox="0 0 160 80">
+      <g filter="url(#carta)">
+        <path d="M10 40 Q50 0 108 34 L150 10 L140 40 L150 70 L108 46 Q50 80 10 40 Z" fill="var(--mare)"/>
+        <circle cx="38" cy="36" r="5" fill="#fff"/>
+      </g>
+    </symbol>
+
+    <!-- Ramo d'ulivo -->
+    <symbol id="ill-ulivo" viewBox="0 0 220 220">
+      <g filter="url(#carta)">
+        <path d="M20 200 Q90 130 200 24" stroke="var(--inchiostro)" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <g fill="var(--ulivo)">
+          <ellipse cx="62" cy="150" rx="30" ry="10" transform="rotate(-60 62 150)"/>
+          <ellipse cx="86" cy="150" rx="30" ry="10" transform="rotate(20 86 150)"/>
+          <ellipse cx="104" cy="104" rx="32" ry="10" transform="rotate(-70 104 104)"/>
+          <ellipse cx="130" cy="108" rx="32" ry="10" transform="rotate(15 130 108)"/>
+          <ellipse cx="148" cy="62" rx="30" ry="10" transform="rotate(-75 148 62)"/>
+          <ellipse cx="176" cy="66" rx="30" ry="10" transform="rotate(10 176 66)"/>
+        </g>
+        <g fill="var(--inchiostro)">
+          <ellipse cx="74" cy="176" rx="9" ry="12"/><ellipse cx="122" cy="132" rx="9" ry="12"/><ellipse cx="166" cy="92" rx="8" ry="11"/>
+        </g>
+      </g>
+    </symbol>
+
+    <!-- Melanzana e cavatielli -->
+    <symbol id="ill-melanzana" viewBox="0 0 220 220">
+      <g filter="url(#carta)">
+        <path d="M70 60 Q20 120 52 180 Q92 230 150 186 Q196 140 140 72 Q110 40 70 60 Z" fill="var(--melanzana)"/>
+        <path d="M70 62 L84 30 L96 56 L118 34 L114 62 L142 62 L118 78 L94 74 L72 84 Z" fill="var(--ulivo)"/>
+        <rect x="92" y="10" width="9" height="30" rx="3" fill="var(--ulivo)"/>
+        <g fill="var(--sole)">
+          <path d="M150 182 q14 -12 28 0 q-4 16 -14 16 q-12 0 -14 -16z"/>
+          <path d="M178 150 q14 -12 28 0 q-4 16 -14 16 q-12 0 -14 -16z"/>
+          <path d="M180 198 q14 -12 28 0 q-4 16 -14 16 q-12 0 -14 -16z"/>
+        </g>
+      </g>
+    </symbol>
+
+    <!-- Monti e sentiero -->
+    <symbol id="ill-monti" viewBox="0 0 240 200">
+      <g filter="url(#carta)">
+        <circle cx="186" cy="46" r="24" fill="var(--sole)"/>
+        <path d="M0 190 L80 52 L160 190 Z" fill="var(--ulivo)"/>
+        <path d="M90 190 L160 82 L240 190 Z" fill="var(--mare)"/>
+        <path d="M70 190 Q96 160 84 140 Q74 118 96 98" stroke="#fff" stroke-width="6" fill="none" stroke-dasharray="10 9" stroke-linecap="round"/>
+      </g>
+    </symbol>
+
+    <!-- Brocca sotto le stelle -->
+    <symbol id="ill-brocca" viewBox="0 0 220 220">
+      <g filter="url(#carta)">
+        <path d="M70 70 L86 40 L132 40 L140 70 Q172 118 150 176 Q140 204 108 204 Q76 204 66 176 Q46 118 70 70 Z" fill="var(--terracotta)"/>
+        <path d="M144 84 Q192 92 168 150" stroke="var(--terracotta)" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <rect x="78" y="112" width="64" height="10" fill="var(--sabbia)"/>
+        <g fill="var(--sole)">
+          <path d="M30 30 l5 12 l12 1 l-9 8 l3 12 l-11 -6 l-11 6 l3 -12 l-9 -8 l12 -1z"/>
+          <path d="M184 18 l4 9 l9 1 l-7 6 l2 9 l-8 -5 l-8 5 l2 -9 l-7 -6 l9 -1z"/>
+          <path d="M196 196 l3 7 l7 1 l-5 4 l2 7 l-7 -4 l-7 4 l2 -7 l-5 -4 l7 -1z"/>
+        </g>
+      </g>
+    </symbol>
+
+    <!-- Casa con ulivo -->
+    <symbol id="ill-casa" viewBox="0 0 240 200">
+      <g filter="url(#carta)">
+        <rect x="30" y="80" width="130" height="110" fill="var(--sabbia-scuro)"/>
+        <path d="M18 86 L95 30 L172 86 Z" fill="var(--terracotta)"/>
+        <path d="M78 190 V138 Q95 118 112 138 V190 Z" fill="var(--mare)"/>
+        <rect x="44" y="100" width="22" height="22" fill="var(--mare)"/>
+        <rect x="124" y="100" width="22" height="22" fill="var(--mare)"/>
+        <rect x="192" y="118" width="9" height="72" fill="var(--inchiostro)"/>
+        <ellipse cx="196" cy="100" rx="38" ry="30" fill="var(--ulivo)"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
 <a class="skip-link" href="#contenuto">Vai al contenuto</a>
 
 <!-- NAV -->
 <nav id="nav">
   <a class="nav-logo" href="#">Wild <em>Table</em> Cilento</a>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#esperienza">L'esperienza</a></li>
-    <li><a href="#territorio">Il territorio</a></li>
-    <li><a href="#vincenza">Vincenza</a></li>
-    <li><a href="#programma">Il programma</a></li>
+    <li><a href="#esperienze">L'esperienza</a></li>
     <li><a href="#pacchetti">I pacchetti</a></li>
+    <li><a href="#vincenza">Vincenza</a></li>
+    <li><a href="#territorio">Dove si dorme</a></li>
+    <li><a href="#programma">Il programma</a></li>
   </ul>
   <div class="nav-right">
-    <div class="nav-cta"><a href="#partecipa">Partecipa</a></div>
+    <div class="nav-cta"><a href="#partecipa">Voglio partecipare</a></div>
     <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Apri il menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -798,25 +1119,22 @@
 </nav>
 
 <main id="contenuto">
-<!-- 1 · HERO -->
+<!-- 1 · APERTURA -->
 <section class="hero">
-  <!-- Un solo video (verticale 720×1280). Per desktop servirebbe una versione orizzontale 1280×720. -->
-  <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto" poster="barca-caletta.webp" aria-hidden="true">
-    <source src="cilento-hero.mp4" type="video/mp4">
-  </video>
-  <button type="button" class="video-toggle" id="videoToggle" aria-label="Metti in pausa il video">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path id="videoToggleIcon" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
-  </button>
-  <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Weekend per piccoli gruppi a Marina di Camerota, Cilento</div>
     <h1>Cooking class, trekking e gita in barca a <em>Marina di Camerota</em></h1>
     <p class="hero-sub">Tre giorni da venerdì a domenica, in un gruppo di massimo 8 persone. Si cucina con Vincenza, si cammina verso Cala Bianca e si esce in barca nell'Area Marina Protetta. Si dorme in una villa a Monte di Luna, con driver privato dalla stazione.</p>
     <div class="hero-actions">
       <a href="#pacchetti" class="btn-primary">Scopri i pacchetti</a>
-      <a href="#partecipa" class="btn-ghost">Voglio partecipare</a>
+      <a href="#partecipa" class="link-freccia">Voglio partecipare</a>
     </div>
     <p class="hero-note">Stiamo raccogliendo le manifestazioni di interesse per le prossime esperienze. Nessun pagamento richiesto in questa fase.</p>
+  </div>
+  <div class="hero-collage">
+    <figure class="foto"><img src="barca-caletta.webp" alt="Un gozzo ancorato in una caletta di acqua turchese sotto le rocce, a Marina di Camerota" width="900" height="1200" loading="lazy" decoding="async" onerror="fotoMancante(this)"></figure>
+    <svg class="ill ill-hero-sole" aria-hidden="true" focusable="false"><use href="#ill-sole"/></svg>
+    <svg class="ill ill-hero-pesce" aria-hidden="true" focusable="false"><use href="#ill-pesce"/></svg>
   </div>
 </section>
 
@@ -832,27 +1150,6 @@
   </dl>
 </section>
 
-<!-- 2 · LA PROMESSA -->
-<section class="promessa" id="esperienza">
-  <div class="promessa-grid">
-    <div>
-      <div class="section-label">Non è una vacanza qualsiasi</div>
-      <h2>Tre giorni per <em>cambiare ritmo.</em></h2>
-    </div>
-    <div class="promessa-text">
-      <p>Ci sono luoghi che si visitano e luoghi che si imparano a conoscere. Il Cilento è uno di questi.</p>
-      <p>A Marina di Camerota abbiamo immaginato tre giorni diversi dal solito. Si cucina insieme, si cammina tra gli ulivi, si scopre la costa dal mare e ci si ritrova intorno a una tavola.</p>
-      <p>Un piccolo gruppo, ritmi più lenti e il piacere di vivere un territorio attraverso le sue persone, i suoi sapori e i suoi paesaggi.</p>
-    </div>
-  </div>
-  <div class="numeri numeri-4">
-    <div class="numero-card"><div class="n">8</div><div class="label">ospiti al massimo</div></div>
-    <div class="numero-card"><div class="n">3</div><div class="label">giorni nel Cilento</div></div>
-    <div class="numero-card"><div class="n">4</div><div class="label">esperienze</div></div>
-    <div class="numero-card"><div class="n">340€</div><div class="label">a persona, da</div></div>
-  </div>
-</section>
-
 <!-- 3 · LE ESPERIENZE -->
 <section class="esperienze" id="esperienze">
   <div class="section-label">Le esperienze</div>
@@ -860,208 +1157,29 @@
   <p class="section-intro">Quattro modi per entrare in contatto con il territorio.</p>
   <div class="exp-grid">
       <article class="exp-card">
+        <figure class="foto" data-ill="ill-melanzana"><img src="foto/cooking-class.webp" alt="Mani che formano i cavatielli durante la cooking class con Vincenza" width="1200" height="900" loading="lazy" decoding="async" onerror="fotoMancante(this)"></figure>
         <h3>Cooking class con Vincenza</h3>
         <p>Una cooking class con Vincenza per scoprire gesti, ricette e sapori della tradizione cilentana.</p>
         <p class="exp-card-detail">Vincenza è la nostra "zia" cilentana e cucina a Marina di Camerota da tutta la vita. Ti insegna a fare i cavatielli (la pasta fresca cilentana di semola, formata a mano con le dita) e le mulignane mbuttunate (melanzane ripiene fritte secondo la ricetta di famiglia)</p>
       </article>
       <article class="exp-card">
+        <figure class="foto"><img src="sentiero.webp" alt="Escursionisti su un sentiero a picco sul mare nel Parco Nazionale del Cilento" width="800" height="600" loading="lazy" decoding="async" onerror="fotoMancante(this)"></figure>
         <h3>Trekking verso Cala Bianca</h3>
         <p>Trekking e passeggiate nella natura, tra gli uliveti e i paesaggi del Cilento.</p>
         <p class="exp-card-detail">Sentieri del Parco Nazionale verso Cala Bianca con guida locale</p>
       </article>
       <article class="exp-card">
+        <figure class="foto"><img src="scogliera.webp" alt="La scogliera e le grotte marine viste dalla prua della barca" width="1100" height="1956" loading="lazy" decoding="async" onerror="fotoMancante(this)"></figure>
         <h3>Gita in barca</h3>
         <p>Una giornata lungo la costa, alla scoperta del mare e delle sue calette.</p>
         <p class="exp-card-detail">Grotte marine e tuffo nell'Area Marina Protetta Costa degli Infreschi</p>
       </article>
       <article class="exp-card">
+        <figure class="foto" data-ill="ill-brocca"><img src="foto/tavolata.webp" alt="La tavolata all’aperto con il vino del Cilento" width="1200" height="900" loading="lazy" decoding="async" onerror="fotoMancante(this)"></figure>
         <h3>Cena sotto le stelle</h3>
         <p>Il piacere di stare insieme, condividere piatti e conversazioni e assaporare la convivialità cilentana.</p>
         <p class="exp-card-detail">Cena sotto le stelle con il cibo preparato insieme e il vino del Cilento</p>
       </article>
-  </div>
-</section>
-
-<!-- 4 · VINCENZA -->
-<section class="vincenza" id="vincenza">
-  <div class="vincenza-grid">
-    <div>
-      <div class="section-label">Vincenza</div>
-      <h2>Le storie più belle <em>cominciano in cucina.</em></h2>
-      <p>Vincenza è la nostra "zia" cilentana. Abita e cucina a Marina di Camerota da tutta la vita. Non è una chef: è una cuoca vera, nel senso più semplice del termine. Conosce ogni pianta, ogni stagione, ogni piatto che questa terra produce da secoli.</p>
-      <p>Con Wild Table entra in cucina con voi. Non fa una dimostrazione. Vi mette le mani in pasta, letteralmente, e vi insegna quello che i ristoranti non vi daranno mai: la ricetta di casa, quella tramandata, quella senza trucchi.</p>
-      <p>La sera cucinate insieme quello che avete imparato, poi lo mangiate fuori sotto le stelle con il vino del Cilento.</p>
-      <div class="piatti">
-        <div class="piatti-label">Cosa si cucina</div>
-        <div class="piatto"><strong>Cavatielli</strong>: la pasta fresca cilentana, formata a mano con le dita</div>
-        <div class="piatto"><strong>Mulignane mbuttunate</strong>: melanzane ripiene secondo la ricetta di famiglia</div>
-        <div class="piatto"><strong>Piatti di stagione</strong>: quello che la terra dà quel giorno</div>
-      </div>
-    </div>
-    <div>
-      <img class="vincenza-img" src="vincenza.webp" width="900" height="1600" loading="lazy" decoding="async" alt="Vincenza, cuoca cilentana di Monte di Luna">
-    </div>
-  </div>
-  <div class="lezione">
-    <h3 class="lezione-title">La lezione di cucina</h3>
-    <p class="lezione-intro">La cooking class con Vincenza non è un corso. È un pomeriggio in cucina con una cilentana che sa fare cose che voi non sapete fare, e ve le insegna senza fronzoli.</p>
-    <div class="steps-grid">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div class="step-content">
-          <h3>Si inizia con la farina</h3>
-          <p>Vincenza porta la farina giusta, quella che usa da sempre. Si impasta insieme, si impara la consistenza, il tempo, la pressione. Nessuno guarda: tutti fanno.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <div class="step-content">
-          <h3>I cavatielli, la pasta di semola del Cilento</h3>
-          <p>Pasta fresca fatta solo con semola di grano duro e acqua, senza uova. Si impasta a lungo fino a ottenere un panetto liscio e compatto, poi si taglia a tocchetti e si forma ogni pezzo con le punte di due dita: un gesto che le nonne cilentane tramandano ai nipoti da generazioni. Il risultato è una pasta corta, irregolare, con una cavità al centro che raccoglie il condimento. Vincenza li condisce con ragù cilentano o con pomodoro e basilico, secondo la stagione.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <div class="step-content">
-          <h3>Le mulignane mbuttunate, melanzane ripiene di casa</h3>
-          <p>Piatto povero della tradizione cilentana, radicato nella dieta mediterranea. Le melanzane lunghe vengono sbucciate, tagliate in quattro per il lungo e incise senza separarle, poi farcite secondo la ricetta di Vincenza. Si friggono in olio abbondante fino a doratura e si servono calde: un piatto unico completo che non trovi nei ristoranti.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <div class="step-content">
-          <h3>Si mangia quello che si è fatto</h3>
-          <p>La sera finale, tutti a tavola fuori. Il cibo è il vostro. Il vino è del Cilento. Non è una cena di gruppo: è il momento in cui un gruppo di sconosciuti diventa una tavolata.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 5 · IL TERRITORIO -->
-<section class="territorio" id="territorio">
-  <div class="territorio-grid">
-    <div>
-      <div class="section-label">Il territorio</div>
-      <h2>Marina di Camerota, <em>il punto di partenza.</em></h2>
-      <p class="territorio-lead">Tra il mare del Cilento, i sentieri del Parco Nazionale e gli uliveti che disegnano il paesaggio, Monte di Luna è il luogo da cui comincia questa esperienza.</p>
-      <h3 class="dove-dormi">Dove si dorme: una villa privata a Monte di Luna</h3>
-      <p>Wild Table è un weekend organizzato per solo 8 persone, in una villa privata a Monte di Luna, Marina di Camerota, nel cuore del Parco Nazionale del Cilento.</p>
-      <p>Non prenoti una camera. Il driver ti aspetta in stazione venerdì sera e da lì ogni cosa è già pensata: dove dormi, cosa mangi, dove vai, chi ti guida. Torni a casa con qualche ricetta nuova e, probabilmente, con qualcuno con cui tenerti in contatto.</p>
-      <p>Si dorme in <strong>due appartamenti</strong>. Le camere sono doppie: può capitare di condividere la stanza con uno dei compagni di viaggio. Fa parte dell'esperienza.</p>
-      <p><strong>Porti solo te stesso.</strong> Il resto è incluso.</p>
-    </div>
-    <div>
-      <img class="territorio-img" src="cala-sorgente.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Marina di Camerota vista dalle colline, con la torre e il mare">
-    </div>
-  </div>
-
-  <div class="arrivare" id="come-arrivare">
-    <h3 class="arrivare-title">Il Cilento è più vicino di quanto credi.</h3>
-    <p class="arrivare-intro">Niente auto, niente parcheggio. Il driver ti aspetta in stazione. Bastano un volo low cost o un Frecciarossa.</p>
-    <div class="arrivare-grid">
-
-    <div class="arrivare-card">
-      <div class="arrivare-route">In aereo → Intercity</div>
-      <p class="arrivare-desc">Ryanair ed easyJet volano su <strong>Salerno Costa d'Amalfi</strong> da Milano Bergamo, Torino, Catania, Brindisi. Dall'aeroporto di Salerno, Intercity diretto a Pisciotta-Palinuro in 40 minuti.</p>
-      <div class="arrivare-rows">
-        <div class="arrivare-row"><span class="ar-city">Da Milano BGY</span><span class="ar-time">~2h30 porta a porta</span></div>
-        <div class="arrivare-row"><span class="ar-city">Da Torino</span><span class="ar-time">~2h45 porta a porta</span></div>
-        <div class="arrivare-row"><span class="ar-city">Da Catania / Brindisi</span><span class="ar-time">~2h00 porta a porta</span></div>
-      </div>
-    </div>
-
-    <div class="arrivare-card arrivare-card--featured">
-      <div class="arrivare-route">Frecciarossa → Intercity</div>
-      <p class="arrivare-desc">Prendi il Frecciarossa fino a Napoli, poi l'Intercity diretto per Pisciotta-Palinuro. Da Napoli ci vogliono solo 1h36, meno di quanto pensi.</p>
-      <div class="arrivare-rows">
-        <div class="arrivare-row"><span class="ar-city">Da Milano</span><span class="ar-time">Frecciarossa + IC · ~4h30</span></div>
-        <div class="arrivare-row"><span class="ar-city">Da Torino</span><span class="ar-time">Frecciarossa + IC · ~5h00</span></div>
-        <div class="arrivare-row"><span class="ar-city">Da Bologna</span><span class="ar-time">Frecciarossa + IC · ~4h00</span></div>
-        <div class="arrivare-row"><span class="ar-city">Da Firenze</span><span class="ar-time">Frecciarossa + IC · ~3h30</span></div>
-      </div>
-    </div>
-
-    <div class="arrivare-card">
-      <div class="arrivare-route">Intercity diretto</div>
-      <p class="arrivare-desc">Da Roma e Napoli l'Intercity raggiunge Pisciotta-Palinuro senza cambi. L'IC 551 da Roma è il treno del weekend: parte la sera di venerdì, arriva direttamente.</p>
-      <div class="arrivare-rows">
-        <div class="arrivare-row"><span class="ar-city">Da Napoli</span><span class="ar-time">IC diretto · 1h36</span></div>
-        <div class="arrivare-row"><span class="ar-city">Da Roma</span><span class="ar-time">IC 551 diretto · ~3h40</span></div>
-      </div>
-    </div>
-
-  </div>
-    <div class="arrivare-nota">
-    <div><strong>Il driver è sempre con voi.</strong> Con The Experience e Long Weekend il driver privato vi aspetta alla stazione di Pisciotta-Palinuro e resta a vostra disposizione per tutto il soggiorno, fino alla partenza. Solo con Self Drive arrivi e ti muovi con la tua auto.</div>
-  </div>
-  </div>
-</section>
-
-<!-- 6 · IL PROGRAMMA -->
-<section class="programma" id="programma">
-  <div class="section-label">Il programma</div>
-  <h2>Tre giorni, <em>senza fretta.</em></h2>
-  <div class="timeline">
-      <div class="giorno">
-        <div class="giorno-header">
-          <span class="giorno-tag">Giovedì sera · solo Long Weekend</span>
-          <span class="giorno-title">L'arrivo anticipato</span>
-        </div>
-        <ul class="attivita">
-          <li><span class="dot"></span><span>Il driver vi aspetta alla stazione di Pisciotta-Palinuro</span></li>
-          <li><span class="dot"></span><span>Check-in in villa a Monte di Luna</span></li>
-          <li><span class="dot"></span><span>Serata libera: il Cilento inizia qui</span></li>
-        </ul>
-      </div>
-      <div class="giorno">
-        <div class="giorno-header">
-          <span class="giorno-tag">Venerdì sera</span>
-          <span class="giorno-title">L'arrivo</span>
-        </div>
-        <ul class="attivita">
-          <li><span class="dot"></span><span>Il driver vi aspetta alla stazione di Pisciotta-Palinuro</span></li>
-          <li><span class="dot"></span><span>Venti minuti di colline e ulivi fino a Monte di Luna</span></li>
-          <li><span class="dot"></span><span>Aperitivo sul terrazzo: salumi, formaggi e prodotti locali</span></li>
-          <li><span class="dot"></span><span>Serata libera a Marina di Camerota</span></li>
-        </ul>
-      </div>
-      <div class="giorno">
-        <div class="giorno-header">
-          <span class="giorno-tag">Sabato</span>
-          <span class="giorno-title">Il giorno pieno</span>
-        </div>
-        <ul class="attivita">
-          <li><span class="dot"></span><span>Colazione a Monte di Luna con vista sul golfo</span></li>
-          <li><span class="dot"></span><span>Trekking guidato verso Cala Bianca nel Parco Nazionale</span></li>
-          <li><span class="dot"></span><span>Ritorno in barca: grotte marine e tuffo nell'Area Marina Protetta</span></li>
-          <li><span class="dot"></span><span>Lezione di cucina con Vincenza: cavatielli e mulignane mbuttunate</span></li>
-          <li><span class="dot"></span><span>Cena sotto le stelle con quello che avete cucinato</span></li>
-        </ul>
-      </div>
-      <div class="giorno">
-        <div class="giorno-header">
-          <span class="giorno-tag">Domenica</span>
-          <span class="giorno-title">Il mare e la lentezza</span>
-        </div>
-        <ul class="attivita">
-          <li><span class="dot"></span><span>Colazione lenta</span></li>
-          <li><span class="dot"></span><span>Ultimo tuffo o passeggiata sul lungomare di Marina di Camerota</span></li>
-          <li><span class="dot"></span><span>Il driver vi riporta alla stazione · <em>fine del weekend base</em></span></li>
-          <li><span class="dot"></span><span>Chi resta: pomeriggio libero, cena in paese</span></li>
-        </ul>
-      </div>
-      <div class="giorno">
-        <div class="giorno-header">
-          <span class="giorno-tag">Lunedì mattina · solo Long Weekend</span>
-          <span class="giorno-title">L'ultima colazione</span>
-        </div>
-        <ul class="attivita">
-          <li><span class="dot"></span><span>Colazione lenta sul terrazzo</span></li>
-          <li><span class="dot"></span><span>Il driver vi riporta alla stazione entro le 11</span></li>
-          <li><span class="dot"></span><span>Voli del lunedì: Torino, Bergamo, Verona, Catania</span></li>
-        </ul>
-      </div>
   </div>
 </section>
 
@@ -1132,6 +1250,217 @@
       </details>
       <a href="#partecipa" class="btn-primary" data-pacchetto="Long Weekend, 610 € (da giovedì a lunedì, con driver)">Voglio partecipare</a>
     </div>
+  </div>
+  <p class="aiuto-contestuale">Non sai quale scegliere? <a href="https://wa.me/393491751853?text=Ciao%20Ugo%2C%20non%20so%20quale%20pacchetto%20scegliere%20per%20Wild%20Table%20Cilento." target="_blank" rel="noopener">Scrivici su WhatsApp</a>, ti aiutiamo noi.</p>
+</section>
+
+<!-- 2 · LA PROMESSA -->
+<section class="promessa" id="esperienza">
+  <div class="promessa-grid">
+    <div>
+      <svg class="ill ill-sezione" aria-hidden="true" focusable="false"><use href="#ill-ulivo"/></svg>
+      <div class="section-label">Non è una vacanza qualsiasi</div>
+      <h2>Tre giorni per <em>cambiare ritmo.</em></h2>
+    </div>
+    <div class="promessa-text">
+      <p>Ci sono luoghi che si visitano e luoghi che si imparano a conoscere. Il Cilento è uno di questi.</p>
+      <p>A Marina di Camerota abbiamo immaginato tre giorni diversi dal solito. Si cucina insieme, si cammina tra gli ulivi, si scopre la costa dal mare e ci si ritrova intorno a una tavola.</p>
+      <p>Un piccolo gruppo, ritmi più lenti e il piacere di vivere un territorio attraverso le sue persone, i suoi sapori e i suoi paesaggi.</p>
+    </div>
+  </div>
+  <figure class="foto foto-larga"><img src="spiaggia.webp" alt="Una spiaggia di ciottoli chiusa tra due montagne verdi, vista dal mare" width="1600" height="900" loading="lazy" decoding="async" onerror="fotoMancante(this)"></figure>
+</section>
+
+<!-- 4 · VINCENZA -->
+<section class="vincenza" id="vincenza">
+  <div class="vincenza-grid">
+    <div>
+      <svg class="ill ill-sezione" aria-hidden="true" focusable="false"><use href="#ill-melanzana"/></svg>
+      <div class="section-label">Vincenza</div>
+      <h2>Le storie più belle <em>cominciano in cucina.</em></h2>
+      <p>Vincenza è la nostra "zia" cilentana. Abita e cucina a Marina di Camerota da tutta la vita. Non è una chef: è una cuoca vera, nel senso più semplice del termine. Conosce ogni pianta, ogni stagione, ogni piatto che questa terra produce da secoli.</p>
+      <p>Con Wild Table entra in cucina con voi. Non fa una dimostrazione. Vi mette le mani in pasta, letteralmente, e vi insegna quello che i ristoranti non vi daranno mai: la ricetta di casa, quella tramandata, quella senza trucchi.</p>
+      <p>La sera cucinate insieme quello che avete imparato, poi lo mangiate fuori sotto le stelle con il vino del Cilento.</p>
+      <div class="piatti">
+        <div class="piatti-label">Cosa si cucina</div>
+        <div class="piatto"><strong>Cavatielli</strong>: la pasta fresca cilentana, formata a mano con le dita</div>
+        <div class="piatto"><strong>Mulignane mbuttunate</strong>: melanzane ripiene secondo la ricetta di famiglia</div>
+        <div class="piatto"><strong>Piatti di stagione</strong>: quello che la terra dà quel giorno</div>
+      </div>
+    </div>
+    <div>
+      <img class="vincenza-img" src="vincenza.webp" width="900" height="1600" loading="lazy" decoding="async" alt="Vincenza, cuoca cilentana di Monte di Luna">
+    </div>
+  </div>
+  <details class="apribile apribile-scuro">
+    <summary>Come si svolge la lezione di cucina</summary>
+    <p class="lezione-intro">La cooking class con Vincenza non è un corso. È un pomeriggio in cucina con una cilentana che sa fare cose che voi non sapete fare, e ve le insegna senza fronzoli.</p>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Si inizia con la farina</h3>
+          <p>Vincenza porta la farina giusta, quella che usa da sempre. Si impasta insieme, si impara la consistenza, il tempo, la pressione. Nessuno guarda: tutti fanno.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>I cavatielli, la pasta di semola del Cilento</h3>
+          <p>Pasta fresca fatta solo con semola di grano duro e acqua, senza uova. Si impasta a lungo fino a ottenere un panetto liscio e compatto, poi si taglia a tocchetti e si forma ogni pezzo con le punte di due dita: un gesto che le nonne cilentane tramandano ai nipoti da generazioni. Il risultato è una pasta corta, irregolare, con una cavità al centro che raccoglie il condimento. Vincenza li condisce con ragù cilentano o con pomodoro e basilico, secondo la stagione.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Le mulignane mbuttunate, melanzane ripiene di casa</h3>
+          <p>Piatto povero della tradizione cilentana, radicato nella dieta mediterranea. Le melanzane lunghe vengono sbucciate, tagliate in quattro per il lungo e incise senza separarle, poi farcite secondo la ricetta di Vincenza. Si friggono in olio abbondante fino a doratura e si servono calde: un piatto unico completo che non trovi nei ristoranti.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>Si mangia quello che si è fatto</h3>
+          <p>La sera finale, tutti a tavola fuori. Il cibo è il vostro. Il vino è del Cilento. Non è una cena di gruppo: è il momento in cui un gruppo di sconosciuti diventa una tavolata.</p>
+        </div>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- 5 · IL TERRITORIO -->
+<section class="territorio" id="territorio">
+  <div class="territorio-grid">
+    <div>
+      <svg class="ill ill-sezione" aria-hidden="true" focusable="false"><use href="#ill-casa"/></svg>
+      <div class="section-label">Il territorio</div>
+      <h2>Marina di Camerota, <em>il punto di partenza.</em></h2>
+      <p class="territorio-lead">Tra il mare del Cilento, i sentieri del Parco Nazionale e gli uliveti che disegnano il paesaggio, Monte di Luna è il luogo da cui comincia questa esperienza.</p>
+      <h3 class="dove-dormi">Dove si dorme: una villa privata a Monte di Luna</h3>
+      <p>Wild Table è un weekend organizzato per solo 8 persone, in una villa privata a Monte di Luna, Marina di Camerota, nel cuore del Parco Nazionale del Cilento.</p>
+      <p>Non prenoti una camera. Il driver ti aspetta in stazione venerdì sera e da lì ogni cosa è già pensata: dove dormi, cosa mangi, dove vai, chi ti guida. Torni a casa con qualche ricetta nuova e, probabilmente, con qualcuno con cui tenerti in contatto.</p>
+      <p>Si dorme in <strong>due appartamenti</strong>. Le camere sono doppie: può capitare di condividere la stanza con uno dei compagni di viaggio. Fa parte dell'esperienza.</p>
+      <p><strong>Porti solo te stesso.</strong> Il resto è incluso.</p>
+    </div>
+    <div class="territorio-foto">
+      <figure class="foto"><img src="cala-sorgente.webp" alt="Marina di Camerota vista dalle colline, con la torre e il mare" width="1200" height="800" loading="lazy" decoding="async" onerror="fotoMancante(this)"></figure>
+      <div class="galleria-villa">
+        <figure class="foto" data-ill="ill-casa"><img src="foto/villa-esterno.webp" alt="La villa di Monte di Luna vista dal giardino" width="1200" height="900" loading="lazy" decoding="async" onerror="fotoMancante(this)"></figure>
+        <figure class="foto"><img src="foto/camera.webp" alt="Una delle camere doppie della villa" width="1200" height="900" loading="lazy" decoding="async" onerror="fotoMancante(this)"></figure>
+        <figure class="foto"><img src="foto/terrazzo.webp" alt="Il terrazzo della villa con vista sul golfo" width="1200" height="900" loading="lazy" decoding="async" onerror="fotoMancante(this)"></figure>
+      </div>
+    </div>
+  </div>
+
+  <details class="apribile" id="come-arrivare">
+    <summary>Come arrivare: treno, aereo e driver</summary>
+    <h3 class="arrivare-title">Il Cilento è più vicino di quanto credi.</h3>
+    <p class="arrivare-intro">Niente auto, niente parcheggio. Il driver ti aspetta in stazione. Bastano un volo low cost o un Frecciarossa.</p>
+    <div class="arrivare-grid">
+
+    <div class="arrivare-card">
+      <div class="arrivare-route">In aereo → Intercity</div>
+      <p class="arrivare-desc">Ryanair ed easyJet volano su <strong>Salerno Costa d'Amalfi</strong> da Milano Bergamo, Torino, Catania, Brindisi. Dall'aeroporto di Salerno, Intercity diretto a Pisciotta-Palinuro in 40 minuti.</p>
+      <div class="arrivare-rows">
+        <div class="arrivare-row"><span class="ar-city">Da Milano BGY</span><span class="ar-time">~2h30 porta a porta</span></div>
+        <div class="arrivare-row"><span class="ar-city">Da Torino</span><span class="ar-time">~2h45 porta a porta</span></div>
+        <div class="arrivare-row"><span class="ar-city">Da Catania / Brindisi</span><span class="ar-time">~2h00 porta a porta</span></div>
+      </div>
+    </div>
+
+    <div class="arrivare-card arrivare-card--featured">
+      <div class="arrivare-route">Frecciarossa → Intercity</div>
+      <p class="arrivare-desc">Prendi il Frecciarossa fino a Napoli, poi l'Intercity diretto per Pisciotta-Palinuro. Da Napoli ci vogliono solo 1h36, meno di quanto pensi.</p>
+      <div class="arrivare-rows">
+        <div class="arrivare-row"><span class="ar-city">Da Milano</span><span class="ar-time">Frecciarossa + IC · ~4h30</span></div>
+        <div class="arrivare-row"><span class="ar-city">Da Torino</span><span class="ar-time">Frecciarossa + IC · ~5h00</span></div>
+        <div class="arrivare-row"><span class="ar-city">Da Bologna</span><span class="ar-time">Frecciarossa + IC · ~4h00</span></div>
+        <div class="arrivare-row"><span class="ar-city">Da Firenze</span><span class="ar-time">Frecciarossa + IC · ~3h30</span></div>
+      </div>
+    </div>
+
+    <div class="arrivare-card">
+      <div class="arrivare-route">Intercity diretto</div>
+      <p class="arrivare-desc">Da Roma e Napoli l'Intercity raggiunge Pisciotta-Palinuro senza cambi. L'IC 551 da Roma è il treno del weekend: parte la sera di venerdì, arriva direttamente.</p>
+      <div class="arrivare-rows">
+        <div class="arrivare-row"><span class="ar-city">Da Napoli</span><span class="ar-time">IC diretto · 1h36</span></div>
+        <div class="arrivare-row"><span class="ar-city">Da Roma</span><span class="ar-time">IC 551 diretto · ~3h40</span></div>
+      </div>
+    </div>
+
+  </div>
+    <div class="arrivare-nota">
+    <div><strong>Il driver è sempre con voi.</strong> Con The Experience e Long Weekend il driver privato vi aspetta alla stazione di Pisciotta-Palinuro e resta a vostra disposizione per tutto il soggiorno, fino alla partenza. Solo con Self Drive arrivi e ti muovi con la tua auto.</div>
+  </div>
+  
+  </details>
+</section>
+
+<!-- 6 · IL PROGRAMMA -->
+<section class="programma" id="programma">
+  <svg class="ill ill-sezione" aria-hidden="true" focusable="false"><use href="#ill-monti"/></svg>
+  <div class="section-label">Il programma</div>
+  <h2>Tre giorni, <em>senza fretta.</em></h2>
+  <div class="timeline">
+      <div class="giorno">
+        <div class="giorno-header">
+          <span class="giorno-tag">Giovedì sera · solo Long Weekend</span>
+          <span class="giorno-title">L'arrivo anticipato</span>
+        </div>
+        <ul class="attivita">
+          <li><span class="dot"></span><span>Il driver vi aspetta alla stazione di Pisciotta-Palinuro</span></li>
+          <li><span class="dot"></span><span>Check-in in villa a Monte di Luna</span></li>
+          <li><span class="dot"></span><span>Serata libera: il Cilento inizia qui</span></li>
+        </ul>
+      </div>
+      <div class="giorno">
+        <div class="giorno-header">
+          <span class="giorno-tag">Venerdì sera</span>
+          <span class="giorno-title">L'arrivo</span>
+        </div>
+        <ul class="attivita">
+          <li><span class="dot"></span><span>Il driver vi aspetta alla stazione di Pisciotta-Palinuro</span></li>
+          <li><span class="dot"></span><span>Venti minuti di colline e ulivi fino a Monte di Luna</span></li>
+          <li><span class="dot"></span><span>Aperitivo sul terrazzo: salumi, formaggi e prodotti locali</span></li>
+          <li><span class="dot"></span><span>Serata libera a Marina di Camerota</span></li>
+        </ul>
+      </div>
+      <div class="giorno">
+        <div class="giorno-header">
+          <span class="giorno-tag">Sabato</span>
+          <span class="giorno-title">Il giorno pieno</span>
+        </div>
+        <ul class="attivita">
+          <li><span class="dot"></span><span>Colazione a Monte di Luna con vista sul golfo</span></li>
+          <li><span class="dot"></span><span>Trekking guidato verso Cala Bianca nel Parco Nazionale</span></li>
+          <li><span class="dot"></span><span>Ritorno in barca: grotte marine e tuffo nell'Area Marina Protetta</span></li>
+          <li><span class="dot"></span><span>Lezione di cucina con Vincenza: cavatielli e mulignane mbuttunate</span></li>
+          <li><span class="dot"></span><span>Cena sotto le stelle con quello che avete cucinato</span></li>
+        </ul>
+      </div>
+      <div class="giorno">
+        <div class="giorno-header">
+          <span class="giorno-tag">Domenica</span>
+          <span class="giorno-title">Il mare e la lentezza</span>
+        </div>
+        <ul class="attivita">
+          <li><span class="dot"></span><span>Colazione lenta</span></li>
+          <li><span class="dot"></span><span>Ultimo tuffo o passeggiata sul lungomare di Marina di Camerota</span></li>
+          <li><span class="dot"></span><span>Il driver vi riporta alla stazione · <em>fine del weekend base</em></span></li>
+          <li><span class="dot"></span><span>Chi resta: pomeriggio libero, cena in paese</span></li>
+        </ul>
+      </div>
+      <div class="giorno">
+        <div class="giorno-header">
+          <span class="giorno-tag">Lunedì mattina · solo Long Weekend</span>
+          <span class="giorno-title">L'ultima colazione</span>
+        </div>
+        <ul class="attivita">
+          <li><span class="dot"></span><span>Colazione lenta sul terrazzo</span></li>
+          <li><span class="dot"></span><span>Il driver vi riporta alla stazione entro le 11</span></li>
+          <li><span class="dot"></span><span>Voli del lunedì: Torino, Bergamo, Verona, Catania</span></li>
+        </ul>
+      </div>
   </div>
 </section>
 
@@ -1221,6 +1550,7 @@
 <section class="prenota" id="partecipa">
   <div class="prenota-grid">
     <div class="prenota-info">
+      <svg class="ill ill-sezione" aria-hidden="true" focusable="false"><use href="#ill-brocca"/></svg>
       <div class="section-label">Manifestazione di interesse</div>
       <h2>Il Cilento ti aspetta. <em>Tu devi solo scegliere di viverlo.</em></h2>
       <p>Otto persone, tre giorni e un territorio da scoprire attraverso esperienze autentiche.</p>
@@ -1244,41 +1574,47 @@
         <div class="form-row">
           <div class="field">
             <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome" autocomplete="given-name" required>
+            <input type="text" id="nome" aria-describedby="err-nome" name="nome" autocomplete="given-name" required>
           </div>
           <div class="field">
             <label for="cognome">Cognome</label>
-            <input type="text" id="cognome" name="cognome" autocomplete="family-name" required>
+            <input type="text" id="cognome" aria-describedby="err-cognome" name="cognome" autocomplete="family-name" required>
           </div>
         </div>
         <div class="field">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" autocomplete="email" required>
+          <input type="email" id="email" aria-describedby="err-email" name="email" autocomplete="email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]{2,}" inputmode="email">
         </div>
         <div class="field">
           <label for="data">Data preferita</label>
-          <select id="data" name="data" required>
+          <select id="data" aria-describedby="err-data" name="data" required>
             <option value="" disabled selected>Scegli una data</option>
             <option>Non so ancora / avvisami delle nuove date</option>
           </select>
+            <span class="campo-errore" id="err-data" aria-live="polite"></span>
+            <span class="campo-errore" id="err-email" aria-live="polite"></span>
+            <span class="campo-errore" id="err-cognome" aria-live="polite"></span>
+            <span class="campo-errore" id="err-nome" aria-live="polite"></span>
         </div>
         <div class="field">
           <label for="pacchetto">Pacchetto</label>
-          <select id="pacchetto" name="pacchetto" required>
+          <select id="pacchetto" aria-describedby="err-pacchetto" name="pacchetto" required>
             <option value="" disabled selected>Scegli il pacchetto</option>
             <option>Self Drive, 340 € (con la tua auto)</option>
             <option>The Experience, 440 € (con driver)</option>
             <option>Long Weekend, 610 € (da giovedì a lunedì, con driver)</option>
           </select>
+            <span class="campo-errore" id="err-pacchetto" aria-live="polite"></span>
         </div>
         <div class="form-row">
           <div class="field">
             <label for="persone">Persone</label>
-            <select id="persone" name="persone" required>
+            <select id="persone" aria-describedby="err-persone" name="persone" required>
               <option value="" disabled selected>Quante?</option>
               <option>1 persona</option><option>2 persone</option>
               <option>3 persone</option><option>4 persone</option><option>Gruppo (5+)</option>
             </select>
+            <span class="campo-errore" id="err-persone" aria-live="polite"></span>
           </div>
           <div class="field">
             <label for="citta">Da dove parti? <span style="text-transform:none;letter-spacing:0">(facoltativo)</span></label>
@@ -1292,7 +1628,7 @@
         </div>
         <div class="field">
           <label for="messaggio">Messaggio <span style="text-transform:none;letter-spacing:0">(facoltativo)</span></label>
-          <textarea id="messaggio" name="messaggio" placeholder="Intolleranze, domande, richieste particolari…"></textarea>
+          <textarea id="messaggio" name="messaggio" maxlength="2000" placeholder="Intolleranze, domande, richieste particolari…"></textarea>
         </div>
         <!-- Campo trappola anti-spam: invisibile alle persone, i bot lo compilano -->
         <div class="hp" aria-hidden="true">
@@ -1300,6 +1636,7 @@
           <input type="text" id="bot-field" name="bot-field" tabindex="-1" autocomplete="off">
         </div>
         <p class="form-privacy">La manifestazione di interesse non comporta alcun obbligo di prenotazione. Inviandola accetti che i tuoi dati vengano usati solo per risponderti, come spiegato nell'<a href="privacy.html">informativa privacy</a>.</p>
+        <p class="bozza-ripresa" id="bozzaRipresa" hidden>Abbiamo ripreso i dati che avevi già scritto.</p>
         <div class="form-error" id="formError" role="alert"></div>
         <button type="submit" class="form-btn">Manifesto il mio interesse</button>
       </form>
@@ -1317,6 +1654,13 @@
     © 2026 Wild Table Cilento · <a href="privacy.html">Informativa privacy</a>
   </div>
 </footer>
+
+<!-- BARRA FISSA SU TELEFONO -->
+<div class="barra-mobile" role="navigation" aria-label="Azioni rapide">
+  <a href="#pacchetti">Prezzi</a>
+  <a href="#partecipa" class="barra-primaria">Voglio partecipare</a>
+  <a href="https://wa.me/393491751853?text=Ciao%20Ugo%2C%20ho%20visto%20Wild%20Table%20Cilento%20e%20vorrei%20saperne%20di%20pi%C3%B9." target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp" class="barra-wa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.856L.073 23.927a.5.5 0 0 0 .609.609l6.084-1.461A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.888a9.874 9.874 0 0 1-5.031-1.378l-.36-.214-3.733.896.914-3.63-.235-.373A9.867 9.867 0 0 1 2.112 12C2.112 6.54 6.54 2.112 12 2.112c5.461 0 9.888 4.428 9.888 9.888 0 5.461-4.427 9.888-9.888 9.888z"/></svg></a>
+</div>
 
 <!-- WHATSAPP FISSO -->
 <aside aria-label="Contatto rapido">
@@ -1386,18 +1730,6 @@ if ('IntersectionObserver' in window) {
   new IntersectionObserver(([en]) => { if (en.isIntersecting) voci.forEach(a => a.removeAttribute('aria-current')); }, { rootMargin: '-45% 0px -50% 0px' }).observe(document.querySelector('.hero'));
 }
 
-// ── Video: pausa / riproduci, e rispetto di "riduci movimento" ──
-const heroVideo = $('heroVideo'), videoToggle = $('videoToggle');
-const ICON_PAUSE = 'M6 5h4v14H6zM14 5h4v14h-4z', ICON_PLAY = 'M7 5v14l12-7z';
-function syncVideoButton() {
-  const paused = heroVideo.paused;
-  $('videoToggleIcon').setAttribute('d', paused ? ICON_PLAY : ICON_PAUSE);
-  videoToggle.setAttribute('aria-label', paused ? 'Riproduci il video' : 'Metti in pausa il video');
-}
-videoToggle.addEventListener('click', () => { heroVideo.paused ? heroVideo.play() : heroVideo.pause(); });
-heroVideo.addEventListener('play', syncVideoButton);
-heroVideo.addEventListener('pause', syncVideoButton);
-if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) heroVideo.pause();
 
 // ── Date: generate dagli attributi, quelle passate spariscono ──
 (function setupDates() {
@@ -1452,17 +1784,45 @@ document.querySelectorAll('.faq-q').forEach(btn => {
 
 // ── Modulo — Netlify Forms ──
 const NOMI_CAMPI = { nome: 'nome', cognome: 'cognome', email: 'email', data: 'data preferita', pacchetto: 'pacchetto', persone: 'numero di persone' };
+const MSG_CAMPO = {
+  nome: 'Scrivi il tuo nome.', cognome: 'Scrivi il tuo cognome.',
+  email: 'Scrivi un indirizzo email completo, per esempio nome@gmail.com.',
+  data: 'Scegli una data, oppure «Non so ancora».', pacchetto: 'Scegli un pacchetto.', persone: 'Indica quante persone siete.'
+};
+function controllaCampo(f) {
+  const ok = f.checkValidity();
+  const err = document.getElementById('err-' + f.id);
+  f.setAttribute('aria-invalid', ok ? 'false' : 'true');
+  if (err) err.textContent = ok ? '' : MSG_CAMPO[f.id] || 'Controlla questo campo.';
+  return ok;
+}
+contactForm.querySelectorAll('[required]').forEach(f => {
+  f.addEventListener('blur', () => { if (f.value) controllaCampo(f); });
+  f.addEventListener('change', () => controllaCampo(f));
+});
+
+// Bozza: se la pagina si ricarica, i dati scritti non si perdono (solo in questo browser)
+const CAMPI_BOZZA = ['nome', 'cognome', 'email', 'data', 'pacchetto', 'persone', 'citta', 'messaggio'];
+try {
+  const bozza = JSON.parse(localStorage.getItem('wt_bozza') || 'null');
+  if (bozza) {
+    let ripresi = 0;
+    CAMPI_BOZZA.forEach(k => { const el = $(k); if (el && bozza[k] && [...(el.options || [{ value: bozza[k] }])].some(o => o.value === bozza[k] || o.text === bozza[k])) { el.value = bozza[k]; ripresi++; } });
+    if (ripresi) $('bozzaRipresa').hidden = false;
+  }
+} catch (e) {}
+contactForm.addEventListener('input', () => {
+  try { const b = {}; CAMPI_BOZZA.forEach(k => b[k] = $(k).value); localStorage.setItem('wt_bozza', JSON.stringify(b)); } catch (e) {}
+});
+
 contactForm.addEventListener('submit', async function(e) {
   e.preventDefault();
   const errorBox = $('formError');
   errorBox.classList.remove('show');
 
-  const invalidi = [...this.querySelectorAll('[required]')].filter(f => !f.checkValidity());
+  const invalidi = [...this.querySelectorAll('[required]')].filter(f => !controllaCampo(f));
   if (invalidi.length) {
-    const emailErrata = invalidi.find(f => f.id === 'email' && f.value.trim());
-    errorBox.textContent = emailErrata
-      ? 'Controlla l’indirizzo email: sembra incompleto.'
-      : 'Completa questi campi: ' + invalidi.map(f => NOMI_CAMPI[f.id] || f.id).join(', ') + '.';
+    errorBox.textContent = 'Mancano ' + invalidi.length + (invalidi.length === 1 ? ' informazione: ' : ' informazioni: ') + invalidi.map(f => NOMI_CAMPI[f.id] || f.id).join(', ') + '.';
     errorBox.classList.add('show');
     invalidi[0].focus();
     return;
@@ -1480,11 +1840,12 @@ contactForm.addEventListener('submit', async function(e) {
       body: new URLSearchParams(new FormData(this)).toString()
     });
     if (!res.ok) throw new Error('HTTP ' + res.status);
+    try { localStorage.removeItem('wt_bozza'); } catch (e) {}
     window.location.href = 'grazie.html';
   } catch (err) {
     btn.textContent = testo;
     btn.disabled = false;
-    errorBox.innerHTML = 'La richiesta non è partita. Riprova tra poco oppure <a href="https://wa.me/393491751853?text=Ciao%20Ugo%2C%20ho%20visto%20Wild%20Table%20Cilento%20e%20vorrei%20partecipare." target="_blank" rel="noopener">scrivici su WhatsApp</a>.';
+    errorBox.innerHTML = 'La richiesta non è partita, ma i tuoi dati sono ancora qui. Riprova tra poco oppure <a href="https://wa.me/393491751853?text=Ciao%20Ugo%2C%20ho%20visto%20Wild%20Table%20Cilento%20e%20vorrei%20partecipare." target="_blank" rel="noopener">scrivici su WhatsApp</a>.';
     errorBox.classList.add('show');
   }
 });
