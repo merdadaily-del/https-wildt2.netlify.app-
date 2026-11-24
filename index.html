@@ -18,8 +18,8 @@
 <!-- GEO -->
 <meta name="geo.region" content="IT-SA">
 <meta name="geo.placename" content="Marina di Camerota, Salerno">
-<meta name="geo.position" content="40.0197;15.3714">
-<meta name="ICBM" content="40.0197, 15.3714">
+<meta name="geo.position" content="40.007675;15.388794">
+<meta name="ICBM" content="40.007675, 15.388794">
 
 <!-- OPEN GRAPH -->
 <meta property="og:type" content="website">
@@ -58,7 +58,7 @@
       "inLanguage": "it-IT",
       "publisher": { "@id": "https://wildt2.netlify.app/#organization" }
     },
-    {"@type": "TouristTrip", "@id": "https://wildt2.netlify.app/#esperienza", "name": "Weekend a Marina di Camerota: cooking class, trekking e gita in barca", "description": "Tre giorni nel Cilento per un gruppo di massimo 8 persone: cooking class con Vincenza, trekking guidato verso Cala Bianca, gita in barca nell'Area Marina Protetta Costa degli Infreschi e cena insieme. Si dorme in una villa privata a Monte di Luna, Marina di Camerota.", "url": "https://wildt2.netlify.app/", "touristType": ["Piccoli gruppi", "Appassionati di cucina", "Escursionisti"], "provider": {"@id": "https://wildt2.netlify.app/#organization"}, "itinerary": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": 1, "item": {"@type": "TouristAttraction", "name": "Cooking class di cucina cilentana con Vincenza"}}, {"@type": "ListItem", "position": 2, "item": {"@type": "TouristAttraction", "name": "Trekking guidato verso Cala Bianca"}}, {"@type": "ListItem", "position": 3, "item": {"@type": "TouristAttraction", "name": "Gita in barca nell'Area Marina Protetta Costa degli Infreschi"}}, {"@type": "ListItem", "position": 4, "item": {"@type": "TouristAttraction", "name": "Cena sotto le stelle con vino del Cilento"}}]}, "offers": [{"@type": "Offer", "name": "Self Drive", "price": "340", "priceCurrency": "EUR", "url": "https://wildt2.netlify.app/#pacchetti"}, {"@type": "Offer", "name": "The Experience", "price": "440", "priceCurrency": "EUR", "url": "https://wildt2.netlify.app/#pacchetti"}, {"@type": "Offer", "name": "Long Weekend", "price": "610", "priceCurrency": "EUR", "url": "https://wildt2.netlify.app/#pacchetti"}]},
+    {"@type": "TouristTrip", "@id": "https://wildt2.netlify.app/#esperienza", "name": "Weekend a Marina di Camerota: cooking class, trekking e gita in barca", "description": "Tre giorni nel Cilento per un gruppo di massimo 8 persone: cooking class con Vincenza, trekking guidato verso Cala Bianca, gita in barca nell'Area Marina Protetta Costa degli Infreschi e cena insieme. Si dorme in una villa privata a Monte di Luna, Marina di Camerota.", "url": "https://wildt2.netlify.app/", "touristType": ["Piccoli gruppi", "Appassionati di cucina", "Escursionisti"], "provider": {"@id": "https://wildt2.netlify.app/#organization"}, "itinerary": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": 1, "item": {"@type": "TouristAttraction", "name": "Cooking class di cucina cilentana con Vincenza"}}, {"@type": "ListItem", "position": 2, "item": {"@type": "TouristAttraction", "name": "Trekking guidato verso Cala Bianca"}}, {"@type": "ListItem", "position": 3, "item": {"@type": "TouristAttraction", "name": "Gita in barca nell'Area Marina Protetta Costa degli Infreschi"}}, {"@type": "ListItem", "position": 4, "item": {"@type": "TouristAttraction", "name": "Cena sotto le stelle con vino del Cilento"}}]}, "offers": [{"@type": "Offer", "name": "Self Drive", "price": "340", "priceCurrency": "EUR", "url": "https://wildt2.netlify.app/#pacchetti"}, {"@type": "Offer", "name": "The Experience", "price": "440", "priceCurrency": "EUR", "url": "https://wildt2.netlify.app/#pacchetti"}, {"@type": "Offer", "name": "Long Weekend", "price": "610", "priceCurrency": "EUR", "url": "https://wildt2.netlify.app/#pacchetti"}], "location": {"@type": "Place", "name": "Monte di Luna, Marina di Camerota", "address": {"@type": "PostalAddress", "addressLocality": "Marina di Camerota", "addressRegion": "SA", "postalCode": "84059", "addressCountry": "IT"}, "geo": {"@type": "GeoCoordinates", "latitude": 40.007675, "longitude": 15.388794}}},
     {
       "@type": "FAQPage",
       "@id": "https://wildt2.netlify.app/#faq",
@@ -964,6 +964,25 @@
     body { padding-bottom: 72px; }
     .toast { bottom: 84px; right: 12px; }
   }
+
+  /* Dove siamo */
+  .dove-siamo { margin-top: 64px; }
+  .dove-siamo-titolo { font-family: var(--f-display); text-transform: uppercase; font-size: clamp(1.8rem, 3vw, 2.4rem); line-height: 1; color: var(--mare); margin-bottom: 10px; }
+  .dove-siamo-testo { max-width: 60ch; margin-bottom: 20px; }
+  .mappa { position: relative; aspect-ratio: 16 / 9; border: 2px solid var(--inchiostro); border-radius: 3px; overflow: hidden; background: var(--mare); }
+  .mappa-disegno, .mappa iframe { display: block; width: 100%; height: 100%; border: 0; }
+  .mappa-etichetta { font: 400 22px var(--f-display); fill: var(--inchiostro); letter-spacing: 1px; }
+  .mappa-etichetta-piccola { font-size: 16px; }
+  .mappa-mare { fill: #fff; }
+  .mappa-carica { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); background: var(--inchiostro); color: #fff; border: none; border-radius: 3px; padding: 12px 20px; font: 700 0.95rem var(--f-testo); cursor: pointer; white-space: nowrap; }
+  .mappa-carica:hover { background: #333; }
+  .mappa-nota { font-size: 0.85rem; color: #555; margin-top: 8px; }
+  .mappa-azioni { display: flex; flex-wrap: wrap; gap: 4px 28px; margin-top: 8px; }
+  .in-breve-grid dd a { color: var(--terracotta-testo); font-weight: 600; white-space: nowrap; }
+  @media (max-width: 768px) {
+    .mappa { aspect-ratio: 4 / 3; }
+    .mappa-azioni { flex-direction: column; gap: 0; }
+  }
 </style>
 <script>
 // Foto non ancora caricate: al loro posto un'illustrazione, oppure niente.
@@ -1143,7 +1162,7 @@ function fotoMancante(img) {
   <h2 id="in-breve-titolo" class="in-breve-titolo">Wild Table in breve</h2>
   <dl class="in-breve-grid">
     <div><dt>Cosa si fa</dt><dd>Cooking class con Vincenza, trekking guidato verso Cala Bianca, gita in barca nell'Area Marina Protetta Costa degli Infreschi e cena insieme sotto le stelle.</dd></div>
-    <div><dt>Dove si dorme</dt><dd>In una villa privata a Monte di Luna, sopra Marina di Camerota: due appartamenti con camere doppie, a volte condivise con un altro ospite.</dd></div>
+    <div><dt>Dove si dorme</dt><dd>In una villa privata a Monte di Luna, sopra Marina di Camerota: due appartamenti con camere doppie, a volte condivise con un altro ospite. <a href="#dove-siamo">Vedi sulla mappa</a></dd></div>
     <div><dt>Quando</dt><dd>Da venerdì sera a domenica. Con il Long Weekend da giovedì a lunedì.</dd></div>
     <div><dt>Come ci si muove</dt><dd>Il driver privato è sempre con voi, dall'arrivo in stazione a Pisciotta-Palinuro alla partenza, in tutti i pacchetti tranne Self Drive.</dd></div>
     <div><dt>Quanto costa</dt><dd>Self Drive 340 €, The Experience 440 €, Long Weekend 610 € a persona. Colazioni incluse.</dd></div>
@@ -1349,6 +1368,35 @@ function fotoMancante(img) {
         <figure class="foto"><img src="foto/camera.webp" alt="Una delle camere doppie della villa" width="1200" height="900" loading="lazy" decoding="async" onerror="fotoMancante(this)"></figure>
         <figure class="foto"><img src="foto/terrazzo.webp" alt="Il terrazzo della villa con vista sul golfo" width="1200" height="900" loading="lazy" decoding="async" onerror="fotoMancante(this)"></figure>
       </div>
+    </div>
+  </div>
+
+  <div class="dove-siamo" id="dove-siamo">
+    <h3 class="dove-siamo-titolo">Dove siamo</h3>
+    <p class="dove-siamo-testo">Monte di Luna, sulle colline sopra Marina di Camerota (Salerno), nel Parco Nazionale del Cilento. A circa 20 minuti dalla stazione di Pisciotta-Palinuro.</p>
+    <div class="mappa" id="mappa" data-src="https://www.openstreetmap.org/export/embed.html?bbox=15.3538%2C39.9857%2C15.4238%2C40.0297&amp;layer=mapnik&amp;marker=40.007675%2C15.388794">
+      <svg class="mappa-disegno" viewBox="0 0 600 340" role="img" aria-label="Mappa disegnata: Monte di Luna, sopra Marina di Camerota, sul mare del Cilento">
+        <g filter="url(#carta)">
+          <rect width="600" height="340" fill="var(--mare)"/>
+          <path d="M0 0 H600 V150 Q540 175 500 160 Q450 140 410 185 Q370 230 300 205 Q250 188 215 230 Q170 280 90 250 Q40 232 0 262 Z" fill="var(--sabbia-scuro)"/>
+          <path d="M0 0 H600 V110 Q520 130 470 112 Q410 90 360 128 Q300 165 240 140 Q170 112 120 160 Q70 205 0 190 Z" fill="var(--ulivo)"/>
+          <path d="M60 60 L120 18 L180 60 Z M380 66 L450 20 L520 66 Z" fill="#2f6f2f"/>
+          <circle cx="300" cy="96" r="18" fill="var(--terracotta)"/>
+          <path d="M300 140 L282 102 A20 20 0 1 1 318 102 Z" fill="var(--terracotta)"/>
+          <circle cx="300" cy="96" r="7" fill="#fff"/>
+          <path d="M440 300 q14 -12 28 0 q-14 12 -28 0z M470 300 l14 -8 v16z" fill="#fff"/>
+        </g>
+        <text x="300" y="172" text-anchor="middle" class="mappa-etichetta">MONTE DI LUNA</text>
+        <text x="215" y="262" text-anchor="middle" class="mappa-etichetta mappa-etichetta-piccola">MARINA DI CAMEROTA</text>
+        <text x="520" y="250" text-anchor="middle" class="mappa-etichetta mappa-etichetta-piccola mappa-mare">MAR TIRRENO</text>
+      </svg>
+      <button type="button" class="mappa-carica" id="mappaCarica">Mostra la mappa interattiva</button>
+    </div>
+    <p class="mappa-nota">La mappa interattiva è di OpenStreetMap e si carica solo se la apri.</p>
+    <div class="mappa-azioni">
+      <a class="link-freccia" href="https://www.google.com/maps/dir/?api=1&amp;destination=40.007675%2C15.388794" target="_blank" rel="noopener">Percorso con Google Maps</a>
+      <a class="link-freccia" href="https://maps.apple.com/?daddr=40.007675,15.388794&amp;q=Wild%20Table%20Cilento" target="_blank" rel="noopener">Percorso con Apple Maps</a>
+      <a class="link-freccia" href="https://www.openstreetmap.org/?mlat=40.007675&amp;mlon=15.388794#map=15/40.007675/15.388794" target="_blank" rel="noopener">Apri in OpenStreetMap</a>
     </div>
   </div>
 
@@ -1714,6 +1762,21 @@ function setMenu(open) {
 }
 navToggle.addEventListener('click', () => setMenu(!nav.classList.contains('menu-open')));
 $('navLinks').addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+
+// ── Mappa: OpenStreetMap si carica solo su richiesta ──
+(function () {
+  const box = $('mappa'), btn = $('mappaCarica');
+  if (!box || !btn) return;
+  btn.addEventListener('click', () => {
+    const f = document.createElement('iframe');
+    f.src = box.dataset.src;
+    f.title = 'Mappa di Monte di Luna, Marina di Camerota (OpenStreetMap)';
+    f.loading = 'lazy';
+    f.referrerPolicy = 'no-referrer';
+    box.replaceChildren(f);
+    f.focus();
+  });
+})();
 
 // ── Voce di menu attiva ──
 if ('IntersectionObserver' in window) {
