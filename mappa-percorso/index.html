@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Il percorso · Wild Table Cilento</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Figtree:wght@400;500;600&display=swap">
+<style>
+  /* Anteprima del componente con le variabili del sito (vedi DESIGN.md) */
+  :root { --terra:#1d211b; --salvia:#4a5c3a; --sabbia:#f4efe6; --mare:#1e2d4a; --terracotta:#a14f33; --terracotta-chiaro:#eaa98a; --bianco:#fff;
+    --f-titoli:'Newsreader', Georgia, 'Times New Roman', serif; --f-testo:'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+  * { box-sizing:border-box; margin:0; }
+  body { font-family:var(--f-testo); font-size:17.5px; line-height:1.7; color:#2a2a2a; background:var(--bianco); -webkit-font-smoothing:antialiased; }
+  .percorso { padding: 96px max(48px, calc((100% - 1100px) / 2)); background: var(--sabbia); }
+  .section-label { display:flex; align-items:center; gap:12px; font-size:0.92rem; font-weight:600; letter-spacing:0.01em; color:var(--salvia); margin-bottom:16px; }
+  .section-label::before { content:''; width:28px; height:2px; background:currentColor; }
+  h2 { font-family:var(--f-titoli); font-weight:400; font-size:clamp(2rem, 3.6vw, 3rem); line-height:1.12; letter-spacing:-0.015em; color:var(--terra); text-wrap:balance; margin-bottom:24px; }
+  h2 em { color:var(--terracotta); }
+  .intro { max-width:560px; color:#555; margin-bottom:48px; text-wrap:pretty; }
+  @media (max-width: 768px) { .percorso { padding: 64px 20px; } }
+</style>
+<script type="module" src="./wt-route-map.js"></script>
+</head>
+<body>
+  <section class="percorso" id="percorso" aria-labelledby="percorso-titolo">
+    <div class="section-label">Il percorso</div>
+    <h2 id="percorso-titolo">All'andata il mare, <em>al ritorno il sentiero.</em></h2>
+    <p class="intro">Si parte in barca dal porto di Marina di Camerota e si costeggia fino alla Baia degli Infreschi, con soste nelle cale. Da Pozzallo si torna a piedi sul Sentiero degli Infreschi, tra macchia e ulivi, fino a Monte di Luna.</p>
+    <wt-route-map></wt-route-map>
+  </section>
+</body>
+</html>
