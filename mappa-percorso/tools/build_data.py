@@ -105,18 +105,18 @@ r = ((WC_N - tlat) / (WC_N - WC_S) * wc.shape[0]).astype(int).clip(0, wc.shape[0
 c = ((tlon - WC_W) / (WC_E - WC_W) * wc.shape[1]).astype(int).clip(0, wc.shape[1] - 1)
 lc = wc[r, c]
 pal = {  # toni smorzati, presi dal paesaggio
-    10: (104, 118, 82),    # bosco (lecci, pini)
-    20: (134, 138, 101),  # macchia mediterranea
-    30: (170, 164, 125),  # prateria
-    40: (184, 172, 134),  # coltivi / uliveti
-    50: (196, 186, 168),  # abitato
-    60: (205, 192, 165),  # roccia nuda
-    80: (150, 150, 120),  # (acqua in WC: sulla terra la tratto come macchia)
-    90: (150, 150, 120), 95: (150, 150, 120), 100: (170, 164, 125),
+    10: (112, 124, 90),   # bosco (lecci, pini)
+    20: (136, 140, 105),  # macchia mediterranea
+    30: (158, 155, 120),  # prateria
+    40: (166, 159, 126),  # coltivi / uliveti
+    50: (180, 174, 156),  # abitato
+    60: (192, 183, 160),  # roccia nuda
+    80: (140, 143, 108),  # (acqua in WC: sulla terra la tratto come macchia)
+    90: (140, 143, 108), 95: (140, 143, 108), 100: (158, 155, 120),
 }
 col = np.zeros((TH, TW, 3), np.float32) + np.array(pal[20], np.float32)
 for k, v in pal.items(): col[lc == k] = v
-col = ndimage.gaussian_filter(col, sigma=(5.0, 5.0, 0))  # bordi morbidi tra classi
+col = ndimage.gaussian_filter(col, sigma=(9.0, 9.0, 0))  # bordi morbidi tra classi
 # spiagge e roccia OSM
 beach = raster(polys(base['land'], {'beach', 'shingle'}), TW, TH, ss=2)
 rock = raster(polys(base['land'], {'bare_rock'}), TW, TH, ss=2)
@@ -127,7 +127,7 @@ rng = np.random.default_rng(7)
 forest = ndimage.gaussian_filter((lc == 10).astype(np.float32), 2.4)
 dots = (rng.random((TH, TW)) < 0.035).astype(np.float32)
 dots = ndimage.gaussian_filter(dots, 1.3) * 7.0
-col *= (1 - 0.16 * np.clip(dots, 0, 1) * forest)[..., None]
+col *= (1 - 0.09 * np.clip(dots, 0, 1) * forest)[..., None]
 # ombreggiatura morbida (luce da nord-ovest) + occlusione
 px = WM / TW
 gy, gx = np.gradient(ndimage.gaussian_filter(Ht, 5.0) * 1.5, px)
@@ -149,19 +149,15 @@ sea = sea * (1 - t3[..., None]) + abyss * t3[..., None]
 # leggera variazione sul fondale vicino alla costa (scogli)
 sea *= (1 - 0.05 * (1 - t2[..., None]) * ndimage.gaussian_filter(rng.random((TH, TW)), 4)[..., None] * 4)
 foam = np.exp(-((dist - 2.5) / 2.2) ** 2) * (landt < 0.5)
-sea = sea * (1 - 0.55 * foam[..., None]) + np.array((236, 232, 220)) * 0.55 * foam[..., None]
+sea = sea * (1 - 0.35 * foam[..., None]) + np.array((236, 232, 220)) * 0.35 * foam[..., None]
 img = col_land * landt[..., None] + sea * (1 - landt[..., None])
-# rete dei sentieri OSM (tenue) e strade principali appena accennate
+# solo i sentieri OSM, appena accennati (nessuna strada: non e una mappa stradale)
 segs = pickle.load(open('segment.pkl', 'rb'))
 im = Image.fromarray(np.clip(img, 0, 255).astype(np.uint8))
 ov = Image.new('RGBA', (TW, TH), (0, 0, 0, 0)); d = ImageDraw.Draw(ov)
 for rr in segs:
-    g = wkb.loads(rr['geometry'])
-    pts = [to_px(x, y, TW, TH) for x, y in g.coords]
-    if rr['class'] in ('path', 'footway', 'steps', 'track', 'bridleway'):
-        d.line(pts, fill=(246, 240, 224, 95), width=2)
-    elif rr['class'] in ('secondary', 'tertiary', 'primary'):
-        d.line(pts, fill=(234, 226, 210, 120), width=3)
+    if rr['class'] in ('path', 'footway', 'steps', 'bridleway'):
+        d.line([to_px(x, y, TW, TH) for x, y in wkb.loads(rr['geometry']).coords], fill=(244, 238, 222, 55), width=2)
 im = Image.alpha_composite(im.convert('RGBA'), ov).convert('RGB')
 im.save(f'{OUT}/terrain-color-4k.jpg', quality=80, optimize=True, progressive=True)
 im.resize((2048, int(2048 * TH / TW)), Image.LANCZOS).save(f'{OUT}/terrain-color.jpg', quality=85, optimize=True, progressive=True)
@@ -221,7 +217,7 @@ STOPS = [
     dict(id='infreschi', name='Baia degli Infreschi', lon=15.4270203, lat=39.9989183, src='OSM natural=bay', d=45),
 ]
 anchors = [snap_water(s['lon'], s['lat'], s['d']) for s in STOPS]
-seq = [0, 1, 2, 3, 4, 3]
+seq = [0, 1, 2, 4, 3]  # all'andata si passa davanti a Pozzallo senza fermarsi; sbarco dopo gli Infreschi
 boat = []
 stop_idx = []
 for a, b in zip(seq, seq[1:]):
@@ -243,21 +239,22 @@ craw = cum(boat)
 marks = [dict(stop=STOPS[k]['id'], t=round(float(craw[i] / craw[-1]), 4)) for k, i in zip(seq, stop_idx)]
 print('boat length m', cb[-1])
 
-# ---------- Trekking: sentiero OSM (Sentiero degli Infreschi) ----------
-trek_ll = json.load(open('trek.json'))
-trek_m = [ll2m(lon, lat) for lon, lat in trek_ll]
-# infittisce per seguire il rilievo
-dense = []
-for a, b in zip(trek_m, trek_m[1:]):
-    n = max(1, int(math.hypot(b[0] - a[0], b[1] - a[1]) / 4))
-    for k in range(n): dense.append((a[0] + (b[0] - a[0]) * k / n, a[1] + (b[1] - a[1]) * k / n))
-dense.append(trek_m[-1])
-dense = chaikin(simplify(dense, 1.2), 2)
+# ---------- A piedi: Pozzallo -> Cala Bianca (bagno) -> Monte di Luna, sentieri OSM ----------
+walks = json.load(open('walks.json'))
+def densify(ll):
+    m = [ll2m(lon, lat) for lon, lat in ll]; out = []
+    for a, b in zip(m, m[1:]):
+        n = max(1, int(math.hypot(b[0] - a[0], b[1] - a[1]) / 4))
+        for k in range(n): out.append((a[0] + (b[0] - a[0]) * k / n, a[1] + (b[1] - a[1]) * k / n))
+    out.append(m[-1]); return chaikin(simplify(out, 1.2), 2)
+w1, w2 = densify(walks['walk1']), densify(walks['walk2'])
+dense = w1 + w2[1:]
 lon = np.array([p[0] / MX + (W + E) / 2 for p in dense]); lat = np.array([p[1] / MY + (S + N) / 2 for p in dense])
 z = sample_dem(lon, lat)
 z = np.maximum(ndimage.gaussian_filter1d(z, 2), 1)
 ct = cum(dense)
-print('trek length m', ct[-1], 'z', z.min(), z.max(), 'up', np.sum(np.clip(np.diff(z), 0, None)))
+t_cb = float(cum(w1)[-1] / ct[-1])
+print('walk length m', ct[-1], 'cala bianca at', t_cb, 'z', z.min(), z.max(), 'up', np.sum(np.clip(np.diff(z), 0, None)))
 
 def rnd(v, k=1): return round(float(v), k)
 data = dict(
@@ -271,8 +268,12 @@ data = dict(
     boat=dict(points=[[rnd(x), rnd(y)] for x, y in boat_s], length_m=rnd(cb[-1], 0), marks=marks),
     trek=dict(points=[[rnd(x), rnd(y), rnd(zz)] for (x, y), zz in zip(dense, z)], length_m=rnd(ct[-1], 0),
               climb_m=rnd(np.sum(np.clip(np.diff(z), 0, None)), 0), max_m=rnd(z.max(), 0),
-              source='OpenStreetMap: sentiero dalla Spiaggia del Pozzallo al Sentiero degli Infreschi, poi verso la localita Monte di Luna'),
+              marks=[dict(stop='pozzallo', t=0), dict(stop='calabianca', t=round(t_cb, 4)), dict(stop='montediluna', t=1)],
+              legs_m=[rnd(cum(w1)[-1], 0), rnd(cum(w2)[-1], 0)],
+              source='OpenStreetMap: Spiaggia Pozzallo -> Cala Bianca -> Monte di Luna (cammino minimo sulla rete pedonale)'),
     stops=[dict(id=s['id'], name=s['name'], lon=s['lon'], lat=s['lat'], xy=[rnd(v) for v in ll2m(s['lon'], s['lat'])], source=s['src']) for s in STOPS]
+          + [dict(id='calabianca', name='Cala Bianca', lon=15.4134263, lat=39.9972419,
+                  xy=[rnd(v) for v in ll2m(15.4134263, 39.9972419)], source='OSM natural=beach "spiaggia Cala Bianca"')]
           + [dict(id='montediluna', name='Monte di Luna', lon=15.386675, lat=40.0055885,
                   xy=[rnd(v) for v in ll2m(15.386675, 40.0055885)], source='Destinazione del link Google indicato')],
 )

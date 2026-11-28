@@ -1,11 +1,13 @@
-"""2/3 · Ricostruisce il sentiero a piedi sulla rete pedonale OpenStreetMap.
+"""2/3 · Ricostruisce i due tratti a piedi sulla rete pedonale OpenStreetMap.
 
-Il link Google indicato va da "Cala Bianca Spiaggia" (39.99724, 15.41343) a "Monte di Luna"
-(40.0055885, 15.386675). Qui si calcola lo stesso collegamento sulla rete OSM e lo si fa partire
-dalla Spiaggia del Pozzallo, che sta sullo stesso tracciato circa 500 m a ovest di Cala Bianca.
-Uscita: trek.json (lista di [lon, lat]).
+Riferimenti indicati da Wild (link Google, modalita a piedi):
+  1. Spiaggia Pozzallo (39.9968841, 15.4075809) -> Cala Bianca Spiaggia (39.9972419, 15.4134263)
+  2. Cala Bianca Spiaggia -> Monte di Luna (40.0055885, 15.386675)
+Ogni punto viene agganciato al nodo piu vicino della rete OSM e il tracciato e il cammino minimo
+sui sentieri. Uscita: walks.json con {"walk1": [[lon, lat], ...], "walk2": [...]}.
 """
 import json, math, pickle
+from collections import Counter
 import networkx as nx
 import shapely.wkb as wkb
 
@@ -20,16 +22,20 @@ for r in segs:
     for a, b in zip(cs, cs[1:]):
         G.add_edge(a, b, weight=dist(a, b), cls=r['class'], name=(r['names'] or {}).get('primary'))
 nodes = list(G.nodes)
-near = lambda lat, lon: min(nodes, key=lambda n: dist(n, (lon, lat)))
-CALA_BIANCA = near(39.9972419, 15.4134263)    # partenza del link Google
-MONTE_DI_LUNA = near(40.0055885, 15.386675)   # arrivo del link Google
-POZZALLO = near(39.99713, 15.40762)           # OSM natural=beach "Spiaggia Pozzallo"
-
-ref = nx.shortest_path(G, CALA_BIANCA, MONTE_DI_LUNA, weight='weight')
-trek = nx.shortest_path(G, POZZALLO, MONTE_DI_LUNA, weight='weight')
+def near(lat, lon, label):
+    n = min(nodes, key=lambda n: dist(n, (lon, lat)))
+    print(f'{label}: agganciato alla rete a {dist(n, (lon, lat)):.0f} m dal punto Google')
+    return n
+POZZALLO = near(39.9968841, 15.4075809, 'Spiaggia Pozzallo')
+CALA_BIANCA = near(39.9972419, 15.4134263, 'Cala Bianca')
+MONTE_DI_LUNA = near(40.0055885, 15.386675, 'Monte di Luna')
 L = lambda p: sum(dist(a, b) for a, b in zip(p, p[1:]))
-join = next(i for i, n in enumerate(trek) if n in set(ref))
-print(f'Cala Bianca -> Monte di Luna: {L(ref):.0f} m')
-print(f'Pozzallo -> Monte di Luna: {L(trek):.0f} m; si innesta sul tracciato di riferimento dopo {L(trek[:join + 1]):.0f} m')
-print('Coincide con il tracciato di riferimento da li in poi:', trek[join:] == ref[ref.index(trek[join]):])
-json.dump(trek, open('trek.json', 'w'))
+out = {}
+for key, a, b in (('walk1', POZZALLO, CALA_BIANCA), ('walk2', CALA_BIANCA, MONTE_DI_LUNA)):
+    p = nx.shortest_path(G, a, b, weight='weight')
+    c = Counter()
+    for u, v in zip(p, p[1:]):
+        c[(G[u][v]['cls'], G[u][v]['name'])] += dist(u, v)
+    print(f'{key}: {L(p):.0f} m', [(k, round(v)) for k, v in c.most_common()])
+    out[key] = p
+json.dump(out, open('walks.json', 'w'))

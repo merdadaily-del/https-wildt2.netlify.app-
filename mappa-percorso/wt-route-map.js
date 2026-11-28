@@ -25,18 +25,20 @@ const CONFIG = {
   boatColor: '#fbf6ea',       // avorio
   trekColor: '#c4532c',       // terracotta
   boatSeconds: 24,            // durata della navigazione
-  trekSeconds: 13,            // durata del trekking
+  trekSeconds: 17,            // durata della parte a piedi (Pozzallo, Cala Bianca, Monte di Luna)
+  swim: 1.6,                  // sosta a Cala Bianca per il bagno (s)
   dwell: 0.9,                 // sosta a ogni tappa (s)
   sun: [-5200, 4600, 1800],   // luce calda da ovest, pomeriggio
 };
 
 const STOP_INFO = {
-  porto: { role: 'Partenza in barca', side: 'n', narrowSide: 'se', short: 'Marina di Camerota' },
-  fortuna: { role: 'Prima cala', side: 's' },
-  montedi: { role: 'Cala', side: 's' },
-  pozzallo: { role: 'Sbarco e inizio del sentiero', side: 'n' },
-  infreschi: { role: 'Baia, sosta', side: 's', narrowSide: 'sw', short: 'Infreschi' },
-  montediluna: { role: 'Arrivo a piedi', side: 'n' },
+  porto: { side: 'n', narrowSide: 'se', short: 'Marina di Camerota' },
+  fortuna: { side: 's' },
+  montedi: { side: 's' },
+  pozzallo: { side: 'w' },
+  calabianca: { side: 's' },
+  infreschi: { side: 's', narrowSide: 'sw', short: 'Infreschi' },
+  montediluna: { side: 'n' },
 };
 
 const MODES = { tutto: 'Itinerario', barca: 'Barca', trek: 'Trekking' };
@@ -57,51 +59,43 @@ canvas.ready { opacity:1; }
 .status.hide { opacity:0; pointer-events:none; }
 .labels { position:absolute; inset:0; pointer-events:none; }
 .stop { position:absolute; left:0; top:0; will-change: transform; }
-.dot { position:absolute; width:9px; height:9px; margin:-4.5px 0 0 -4.5px; border-radius:50%; background:#fbf6ea; border:1.5px solid var(--wt-mare);
-  box-shadow: 0 0 0 3px rgba(251,246,234,0.35); opacity:0; transform: scale(.4); transition: opacity .6s, transform .6s; }
+.dot { position:absolute; width:7px; height:7px; margin:-3.5px 0 0 -3.5px; border-radius:50%; background:#fbf6ea; border:1.5px solid var(--wt-mare);
+  opacity:0; transform: scale(.4); transition: opacity .6s, transform .6s; }
 .stop.trek .dot { border-color: ${CONFIG.trekColor}; }
 .stop.on .dot { opacity:1; transform: scale(1); }
-.tag { position:absolute; white-space:nowrap; opacity:0; transform: translateY(4px); transition: opacity .7s ease, transform .7s ease; }
-.tag b { display:block; font-family: var(--f-titoli, Newsreader, Georgia, serif); font-weight:400; font-size: 1.02rem; line-height:1.15; color: var(--wt-terra);
-  text-shadow: 0 0 6px rgba(251,248,240,.95), 0 0 2px rgba(251,248,240,.95); }
-.tag span { display:block; font-size: 0.72rem; color:#3c3c3c; margin-top:1px; text-shadow: 0 0 5px rgba(251,248,240,.95); }
+.tag { position:absolute; white-space:nowrap; opacity:0; transform: translateY(3px); transition: opacity .7s ease, transform .7s ease;
+  font-size: 0.76rem; font-weight:500; letter-spacing:0.01em; color: var(--wt-terra);
+  text-shadow: 0 0 5px rgba(251,248,240,.95), 0 0 2px rgba(251,248,240,.9); }
 .stop.named .tag { opacity:1; transform:none; }
-.stop[data-side="s"] .tag { left:-40px; top:12px; }
-.stop[data-side="n"] .tag { left:10px; bottom:10px; }
-.stop[data-side="se"] .tag { left:-4px; top:12px; }
-.stop[data-side="sw"] .tag { right:-6px; top:12px; text-align:right; }
-.stop[data-side="w"] .tag { right:12px; top:-8px; text-align:right; }
-.stop[data-side="e"] .tag { left:12px; top:-8px; }
-.bar { position:absolute; left:16px; bottom:16px; right:16px; display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; pointer-events:none; }
-.bar > * { pointer-events:auto; }
-.ctl { display:flex; align-items:center; gap:2px; background: rgba(251,248,242,0.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  border:1px solid rgba(29,33,27,0.12); border-radius:2px; padding:3px; }
-button { font: inherit; font-size: 0.86rem; font-weight:500; color: var(--wt-terra); background: transparent; border:0; border-radius:2px;
-  min-height: 38px; padding: 0 12px; cursor:pointer; display:inline-flex; align-items:center; gap:7px; }
-button:hover { background: rgba(74,92,58,0.08); }
+.stop[data-side="s"] .tag { left:-12px; top:9px; }
+.stop[data-side="n"] .tag { left:8px; bottom:7px; }
+.stop[data-side="se"] .tag { left:-4px; top:9px; }
+.stop[data-side="sw"] .tag { right:-4px; top:9px; text-align:right; }
+.stop[data-side="w"] .tag { right:10px; top:-9px; text-align:right; }
+.stop[data-side="e"] .tag { left:10px; top:-9px; }
+.bar { position:absolute; left:14px; bottom:14px; display:flex; align-items:center; gap:2px; padding:3px;
+  background: rgba(251,248,242,0.86); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius:2px; }
+.sep { width:1px; height:18px; background: rgba(29,33,27,0.15); margin: 0 6px; }
+button { font: inherit; font-size: 0.8rem; font-weight:500; color: #555; background: transparent; border:0; border-radius:2px;
+  min-height: 34px; padding: 0 9px; cursor:pointer; display:inline-flex; align-items:center; position:relative; }
+button:hover { color: var(--wt-terra); }
 button:focus-visible { outline: 2px solid var(--wt-salvia); outline-offset: 1px; }
-button[aria-pressed="true"] { background: var(--wt-salvia); color:#fff; }
-button.icon { width:38px; padding:0; justify-content:center; }
-svg { width:18px; height:18px; fill:none; stroke: currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
-.legend { margin-left:auto; display:flex; gap:16px; font-size:0.78rem; color:#2a2a2a; background: rgba(251,248,242,0.92); border:1px solid rgba(29,33,27,0.12);
-  border-radius:2px; padding: 8px 12px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
-.legend i { display:inline-block; width:22px; height:3px; border-radius:2px; vertical-align:middle; margin-right:7px; }
-.legend .b i { background:${CONFIG.boatColor}; box-shadow: 0 0 0 1px rgba(30,45,74,.55); }
-.legend .t i { background:${CONFIG.trekColor}; }
-.credit { font-size:0.7rem; color:#666; margin-top:8px; line-height:1.5; }
+button[aria-pressed="true"] { color: var(--wt-salvia); }
+button[aria-pressed="true"]::after { content:''; position:absolute; left:9px; right:9px; bottom:6px; height:1.5px; background: currentColor; }
+button.icon { width:34px; padding:0; justify-content:center; color: var(--wt-terra); }
+svg { width:16px; height:16px; fill:none; stroke: currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.meta { display:flex; flex-wrap:wrap; gap:6px 20px; margin-top:12px; font-size:0.78rem; color:#555; }
+.meta i { display:inline-block; width:18px; height:2px; vertical-align:middle; margin-right:7px; }
+.meta .b i { background: var(--wt-mare); opacity:.55; }
+.meta .t i { background:${CONFIG.trekColor}; }
+.credit { font-size:0.68rem; color:#767676; margin-top:4px; line-height:1.5; }
 .credit a { color:inherit; }
-.hint { position:absolute; right:16px; top:14px; font-size:0.74rem; color:#555; background: rgba(251,248,242,0.85); padding:5px 9px; border-radius:2px;
-  opacity:0; transition: opacity .6s; pointer-events:none; }
+.hint { position:absolute; right:14px; top:12px; font-size:0.72rem; color:#555; opacity:0; transition: opacity .6s; pointer-events:none;
+  text-shadow: 0 0 5px rgba(251,248,240,.95); }
 .hint.on { opacity:1; }
 @media (max-width: 720px) {
-  .bar { position:static; padding: 10px 0 0; }
-  .ctl { flex: 1 1 auto; justify-content:space-between; }
-  .modes { width:100%; }
-  .modes button { flex:1; justify-content:center; padding:0 6px; }
-  .legend { margin-left:0; width:100%; justify-content:center; }
+  .bar { position:static; margin-top:8px; padding:0; background:none; backdrop-filter:none; -webkit-backdrop-filter:none; justify-content:space-between; }
   .hint { left:12px; right:auto; top:10px; }
-  .tag b { font-size: 0.9rem; }
-  .tag span { display:none; }
 }
 @media (prefers-reduced-motion: reduce) { canvas, .poster, .tag, .dot { transition:none; } }
 `;
@@ -146,23 +140,22 @@ class WTRouteMap extends HTMLElement {
       <div class="wrap">
       <div class="frame" part="frame">
         <img class="poster" alt="" src="${new URL('poster.webp', BASE)}" onerror="this.remove()">
-        <canvas role="img" aria-label="Mappa tridimensionale della costa tra Marina di Camerota e la Baia degli Infreschi, con la rotta in barca e il sentiero da Pozzallo a Monte di Luna" tabindex="-1"></canvas>
+        <canvas role="img" aria-label="Mappa tridimensionale della costa tra Marina di Camerota e la Baia degli Infreschi, con la rotta in barca fino a Pozzallo e il percorso a piedi da Pozzallo a Cala Bianca e poi a Monte di Luna" tabindex="-1"></canvas>
         <div class="labels" aria-hidden="true"></div>
         <div class="status" role="status">Carico il territorio…</div>
         <div class="hint">${matchMedia('(pointer: coarse)').matches ? 'Usa due dita per ruotare e ingrandire' : 'Trascina per ruotare'}</div>
       </div>
         <div class="bar">
-          <div class="ctl">
-            <button class="icon" data-act="play" aria-label="Pausa">${ICON.pause}</button>
-            <button class="icon" data-act="restart" aria-label="Riavvia l'animazione">${ICON.restart}</button>
-            <button data-act="full" aria-label="Mostra l'intero itinerario">${ICON.full}<span>Vista d'insieme</span></button>
-          </div>
-          <div class="ctl modes" role="group" aria-label="Scegli il percorso">
+          <button class="icon" data-act="play" aria-label="Pausa">${ICON.pause}</button>
+          <button class="icon" data-act="restart" aria-label="Riavvia l'animazione">${ICON.restart}</button>
+          <button class="icon" data-act="full" aria-label="Mostra l'intero itinerario" title="Vista d'insieme">${ICON.full}</button>
+          <span class="sep" aria-hidden="true"></span>
+          <span class="modes" role="group" aria-label="Scegli il percorso" style="display:contents">
             ${Object.entries(MODES).map(([k, v]) => `<button data-mode="${k}" aria-pressed="${k === 'tutto'}">${v}</button>`).join('')}
-          </div>
-          <div class="legend"><span class="b"><i></i>Barca <span class="km-b"></span></span><span class="t"><i></i>A piedi <span class="km-t"></span></span></div>
+          </span>
         </div>
       </div>
+      <div class="meta"><span class="b"><i></i>In barca <span class="km-b"></span></span><span class="t"><i></i>A piedi <span class="km-t"></span></span></div>
       <div class="credit">Dati: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a>,
         ESA WorldCover 2021 (CC BY 4.0), AWS Terrain Tiles. La rotta della barca è indicativa: segue la costa a distanza di sicurezza.</div>`;
     this.$ = (s) => root.querySelector(s);
@@ -279,8 +272,8 @@ class WTRouteMap extends HTMLElement {
     this.$('[data-act="restart"]').onclick = () => this.restart();
     this.$('[data-act="full"]').onclick = () => this.showAll();
     this.shadowRoot.querySelectorAll('[data-mode]').forEach((b) => (b.onclick = () => this.setMode(b.dataset.mode)));
-    this.$('.km-b').textContent = `· circa ${(this.route.boat.length_m / 1000).toFixed(0)} km`;
-    this.$('.km-t').textContent = `· ${(this.route.trek.length_m / 1000).toFixed(1).replace('.', ',')} km, +${Math.round(this.route.trek.climb_m / 10) * 10} m`;
+    this.$('.km-b').textContent = `circa ${(this.route.boat.length_m / 1000).toFixed(0)} km`;
+    this.$('.km-t').textContent = `${(this.route.trek.length_m / 1000).toFixed(1).replace('.', ',')} km, circa ${Math.round(this.route.trek.climb_m / 10) * 10} m di salita`;
     this.canvas.addEventListener('pointermove', (e) => this.onHover(e));
     this.canvas.addEventListener('pointerleave', () => { this.hover = null; this.kick(); });
     this.canvas.addEventListener('click', (e) => this.onHover(e, true));
@@ -353,10 +346,10 @@ class WTRouteMap extends HTMLElement {
       const l = new Line2(g, m); l.computeLineDistances(); l.renderOrder = order; l.frustumCulled = false; this.scene.add(l);
       l.userData.n = pts.length - 1; return l;
     };
-    this.boatHalo = mkLine(boatPts, '#1e2d4a', 6, 0.2, 2);
-    this.boatLine = mkLine(boatPts, CONFIG.boatColor, 2.4, 1, 3);
-    this.trekHalo = mkLine(trekPts, '#fbf6ea', 6.5, 0.55, 2);
-    this.trekLine = mkLine(trekPts, CONFIG.trekColor, 3, 1, 3);
+    this.boatHalo = mkLine(boatPts, '#1e2d4a', 4.5, 0.12, 2);
+    this.boatLine = mkLine(boatPts, CONFIG.boatColor, 1.8, 0.95, 3);
+    this.trekHalo = mkLine(trekPts, '#fbf6ea', 4.5, 0.4, 2);
+    this.trekLine = mkLine(trekPts, CONFIG.trekColor, 2.2, 1, 3);
     this.lines = [this.boatHalo, this.boatLine, this.trekHalo, this.trekLine];
 
     // piccola imbarcazione: scafo affusolato e tuga, nessuna icona da navigatore
@@ -384,9 +377,9 @@ class WTRouteMap extends HTMLElement {
   buildLabels() {
     const wrap = this.$('.labels');
     this.stops = this.route.stops.map((s) => {
-      const info = STOP_INFO[s.id] || { role: '', side: 's' };
-      const el = document.createElement('div'); el.className = 'stop' + (s.id === 'montediluna' ? ' trek' : ''); el.dataset.side = info.side;
-      el.innerHTML = `<div class="dot"></div><div class="tag"><b>${s.name}</b><span>${info.role}</span></div>`;
+      const info = STOP_INFO[s.id] || { side: 's' };
+      const el = document.createElement('div'); el.className = 'stop' + (['montediluna', 'calabianca'].includes(s.id) ? ' trek' : ''); el.dataset.side = info.side;
+      el.innerHTML = `<div class="dot"></div><div class="tag">${s.name}</div>`;
       el.title = s.name;
       wrap.appendChild(el);
       const [x, y] = s.xy; const h = this.heightAt(x, y);
@@ -395,6 +388,8 @@ class WTRouteMap extends HTMLElement {
     // la tappa Pozzallo coincide con l'inizio del sentiero: uso il punto della linea
     const pz = this.stops.find((s) => s.id === 'pozzallo'); if (pz) pz.pos.copy(this.trekPath.p[0]);
     const md = this.stops.find((s) => s.id === 'montediluna'); if (md) md.pos.copy(this.trekPath.p[this.trekPath.p.length - 1]);
+    const cb = this.stops.find((s) => s.id === 'calabianca'); const tcb = this.route.trek.marks?.find((m) => m.stop === 'calabianca');
+    if (cb && tcb) this.trekPath.at(tcb.t, cb.pos);
   }
 
   /* ---------- Sequenza: posa di camera e avanzamento in funzione del tempo ---------- */
@@ -428,7 +423,11 @@ class WTRouteMap extends HTMLElement {
       for (const L of legs) { if (t < L.t0) return L.a; if (t <= L.t1) return lerp(L.a, L.b, easeIO((t - L.t0) / (L.t1 - L.t0))); }
       return 1;
     };
-    const trekAt = (t) => clamp(t / CONFIG.trekSeconds, 0, 1) < 1 ? smooth(clamp(t / CONFIG.trekSeconds, 0, 1)) * 0.15 + clamp(t / CONFIG.trekSeconds, 0, 1) * 0.85 : 1;
+    // a piedi: Pozzallo -> Cala Bianca, sosta per il bagno, poi su fino a Monte di Luna
+    const tCB = (this.route.trek.marks.find((m) => m.stop === 'calabianca') || { t: 0.22 }).t;
+    const walkT = CONFIG.trekSeconds - CONFIG.swim, d1 = walkT * tCB, d2 = walkT - d1;
+    const trekAt = (t) => t <= d1 ? lerp(0, tCB, easeIO(t / d1)) : t <= d1 + CONFIG.swim ? tCB : lerp(tCB, 1, easeIO((t - d1 - CONFIG.swim) / d2));
+    const cbReached = d1;
 
     const pz = stopPos('pozzallo');
     const pozzPose = pose(pz.x - 150, 60, pz.z - 300, followDist * 0.9, 0.42, 0.9);
@@ -456,7 +455,13 @@ class WTRouteMap extends HTMLElement {
       add('intro', 2.2, (u) => ({ cam: lerpPose(overview, pozzPose, smooth(u)), boat: null, trek: 0, show: u > 0.5 ? ['pozzallo'] : [] }));
     }
     if (mode === 'tutto' || mode === 'trek') {
-      add('trek', CONFIG.trekSeconds, (u) => { const f = trekAt(u * CONFIG.trekSeconds); return { cam: followTrek(f), boat: mode === 'tutto' ? 1 : null, trek: f, show: f > 0.97 ? ['montediluna'] : [] }; });
+      add('trek', CONFIG.trekSeconds, (u) => {
+        const lt = u * CONFIG.trekSeconds, f = trekAt(lt); const show = [];
+        if (lt < 2.5) show.push('pozzallo');
+        if (lt >= cbReached - 0.2 && lt < cbReached + CONFIG.swim + 2.2) show.push('calabianca');
+        if (f > 0.97) show.push('montediluna');
+        return { cam: followTrek(f), boat: mode === 'tutto' ? 1 : null, trek: f, show, dots: lt >= cbReached ? ['calabianca'] : [] };
+      });
     }
     const fin = mode === 'tutto' ? finalAll : mode === 'barca' ? finalBoat : finalTrek;
     add('fine', 3.8, () => ({ cam: fin, boat: mode === 'trek' ? null : 1, trek: mode === 'barca' ? null : 1, final: true }));
@@ -522,7 +527,7 @@ class WTRouteMap extends HTMLElement {
     const narrow = w < 560;
     for (const s of this.stops || []) {
       s.el.dataset.side = (narrow && s.info.narrowSide) || s.info.side;
-      s.el.querySelector('b').textContent = (narrow && s.info.short) || s.name;
+      s.el.querySelector('.tag').textContent = (narrow && s.info.short) || s.name;
     }
     if (this.timeline && prev && Math.abs(prev - this.aspect) > 0.05) this.timeline = this.buildTimeline(this.mode);
     this.kick();
@@ -573,15 +578,15 @@ class WTRouteMap extends HTMLElement {
     const boatOn = st.boat != null, trekOn = st.trek != null;
     if (st.final) {
       if (boatOn) ['porto', 'fortuna', 'montedi', 'pozzallo', 'infreschi'].forEach((i) => visibleIds.add(i));
-      if (trekOn) ['pozzallo', 'montediluna'].forEach((i) => visibleIds.add(i));
-      const nm = narrow ? ['porto', 'pozzallo', 'infreschi', 'montediluna'] : [...visibleIds];
+      if (trekOn) ['pozzallo', 'calabianca', 'montediluna'].forEach((i) => visibleIds.add(i));
+      const nm = narrow ? ['porto', 'pozzallo', 'calabianca', 'infreschi', 'montediluna'] : [...visibleIds];
       nm.filter((i) => visibleIds.has(i)).forEach((i) => named.add(i));
       if (!boatOn) named.add('pozzallo');
     } else {
       (st.show || []).forEach((i) => { visibleIds.add(i); named.add(i); });
       (st.dots || []).forEach((i) => visibleIds.add(i));
       (st.recent || []).forEach((i) => named.add(i));
-      if (st.phase === 'trek' || st.phase === 'pozzallo') { if (this.mode === 'tutto') ['porto', 'fortuna', 'montedi', 'infreschi'].forEach((i) => visibleIds.add(i)); visibleIds.add('pozzallo'); named.add(st.trek < 0.25 ? 'pozzallo' : ''); }
+      if (st.phase === 'trek' || st.phase === 'pozzallo') { if (this.mode === 'tutto') ['porto', 'fortuna', 'montedi', 'infreschi'].forEach((i) => visibleIds.add(i)); visibleIds.add('pozzallo'); }
     }
     if (this.hover) { visibleIds.add(this.hover); named.add(this.hover); }
     for (const s of this.stops) {
